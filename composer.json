@@ -13,7 +13,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "more-cores/laravel-restcord": "^3.0",
+        "more-cores/laravel-restcord": "2.*",
         "socialiteproviders/discord": "^2.0"
     },
     "require-dev": {
