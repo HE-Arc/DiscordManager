@@ -41,6 +41,9 @@ class LoginController extends Controller
         session("discord", $discord);
         request()->session()->put("discord", $discord);
         $guilds = $discord->guilds();
+        echo "<pre>";
+//        var_dump($guilds);
+        echo "</pre>";
 
         request()->session()->put("yo", "yoyo");
         request()->session()->save();
