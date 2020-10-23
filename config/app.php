@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        LaravelRestcord\ServiceProvider::class,
         /*
          * Application Service Providers...
          */

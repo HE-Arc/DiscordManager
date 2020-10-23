@@ -2,10 +2,10 @@
 
 
 namespace App\Http\Controllers;
+
 use Laravel\Socialite\Facades\Socialite;
 use LaravelRestcord\Discord;
 use LaravelRestcord\ServiceProvider;
-use Ramsey\Uuid\Guid\Guid;
 use RestCord\DiscordClient;
 
 class LoginController extends Controller
@@ -18,7 +18,7 @@ class LoginController extends Controller
     public function redirectToProvider()
     {
         echo "yoyo";
-        return Socialite::driver('discord')->scopes('guilds')->redirect();
+        return Socialite::driver('discord')->scopes(['guilds'] )->redirect();
     }
 
     /**
@@ -33,30 +33,28 @@ class LoginController extends Controller
 
         $apiclient = new Discord\ApiClient($user->token);
         $discord = new Discord($apiclient);
-        $this->laravel['config']['laravel-restcord']['bot-token'] = $user->token;
-
+//        $yo = app(DiscordClient::class);
+//        $yo = new DiscordClient(['token'=> $user->token] );
+//        var_dump($yo->user->getCurrentUser());
+//                echo '<pre>';
+//                var_dump($yo);
+//                echo '</pre>';
         $guilds = $discord->guilds();
         echo "<pre>";
 //        var_dump($guilds);
         echo "</pre>";
 
-        $dc = app(DiscordClient::class);
-        echo $user->token;
-        echo "<pre>";
-        var_dump($dc->guild->getGuild(['guild.id' => 495147403683299330]));
-        var_dump($dc->user->getCurrentUser());
-        var_dump($dc->user->getUser(['user.id' => 300392847180562432]));
-        echo "</pre>";
-
 
         foreach ($guilds as $guild) {
-            $guild->userCan(Discord\Permissions\Permission::ADMINISTRATOR);
-            echo"<script language='javascript'>
-            alert(";
-            echo $user->token;
-            echo ")
-</script>";
+            if ($guild->id == 495147403683299330){
+                echo $guild->userCan(Discord\Permissions\Permission::MANAGE_ROLES);
+                echo '<pre>';
+                var_dump($guild);
+                echo '</pre>';
+            }
+
         }
+
 
 
     }
