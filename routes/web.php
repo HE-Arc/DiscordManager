@@ -21,6 +21,8 @@ Route::get('/discord/bot-added', [LoginController::class, 'handleBotCallback']);
 =======
 >>>>>>> f_dev
 
+Route::get('/discord/bot-added', [LoginController::class, 'handleBotCallback']);
+
 Route::get('/yo', function () {
     return view('welcome');
 });

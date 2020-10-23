@@ -10,10 +10,7 @@ use RestCord\DiscordClient;
 
 class LoginController extends Controller
 {
-<<<<<<< HEAD
 
-=======
->>>>>>> f_dev
     /**
      * Redirect the user to the GitHub authentication page.
      *
@@ -32,10 +29,7 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-<<<<<<< HEAD
         Discord::setCallbackUrl("http://discordmanager.test");
-=======
->>>>>>> f_dev
         $user = Socialite::driver('discord')->user();
 
 
@@ -50,7 +44,6 @@ class LoginController extends Controller
         $guilds = $discord->guilds();
 
 
-<<<<<<< HEAD
 
         echo "<script>alert('hello') </script>";
 
@@ -78,19 +71,5 @@ class LoginController extends Controller
             echo '</script>';
             echo $_GET['code'];
         }
-=======
-        foreach ($guilds as $guild) {
-            if ($guild->id == 495147403683299330){
-                echo $guild->userCan(Discord\Permissions\Permission::MANAGE_ROLES);
-                echo '<pre>';
-                var_dump($guild);
-                echo '</pre>';
-            }
-
-        }
-
-
-
->>>>>>> f_dev
     }
 }
