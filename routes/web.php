@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use \App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/a', [LoginController::class, 'redirectToProvider']);
 
-Route::get('/', function () {
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+
+Route::get('/discord/bot-added', [LoginController::class, 'handleBotCallback']);
+
+Route::get('/yo', function () {
     return view('welcome');
 });
