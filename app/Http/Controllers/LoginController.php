@@ -40,6 +40,9 @@ class LoginController extends Controller
 //                var_dump($yo);
 //                echo '</pre>';
         $guilds = $discord->guilds();
+        echo "<pre>";
+//        var_dump($guilds);
+        echo "</pre>";
 
 
         foreach ($guilds as $guild) {
