@@ -10,5 +10,6 @@ class HomeController extends Controller
     {
         $yo = new LoginController();
         $yo->handleProviderCallback();
+//        request()->session()->put("yo", "yoyo");
     }
 }

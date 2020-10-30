@@ -15,11 +15,6 @@ use \App\Http\Controllers\LoginController;
 Route::get('/a', [LoginController::class, 'redirectToProvider']);
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
-<<<<<<< HEAD
-
-Route::get('/discord/bot-added', [LoginController::class, 'handleBotCallback']);
-=======
->>>>>>> f_dev
 
 Route::get('/discord/bot-added', [LoginController::class, 'handleBotCallback']);
 
