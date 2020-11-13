@@ -3,8 +3,12 @@
 
 namespace App\Http\Controllers;
 
+use http\Client\Curl\User;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use LaravelRestcord\Authentication\Socialite\DiscordProvider;
 use LaravelRestcord\Discord;
 use LaravelRestcord\ServiceProvider;
 use RestCord\DiscordClient;
@@ -25,11 +29,8 @@ class LoginController extends Controller
 
     public function loginCallback()
     {
-        $user = Socialite::driver('discord')->user();
-//        var_dump($user);
-
-        $apiclient = new Discord\ApiClient($user->token);
-        $discord = new Discord($apiclient);
+        DiscordProvider::$token = Socialite::driver('discord')->user()->token;
+        event(new Login("bidon", null,false));
 
         return view('home.index');
     }
@@ -41,13 +42,11 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-//        $user = Socialite::driver('discord')->user();
-//        var_dump($user);
         $apiclient = app(Discord\ApiClient::class);
         $discord = new Discord($apiclient);
-        var_dump(session('discord_token'));
-//        return true;
         $guilds = $discord->guilds();
+
+//        dd($guilds);
 
         foreach ($guilds as $guild) {
             if ($guild->id == 495147403683299330){
@@ -69,11 +68,9 @@ class LoginController extends Controller
 //            b.onerror=function(a){return console.error(a)},b.onmessage=function(a){try{var c=JSON.parse(a.data);0===c.op&&"READY"===c.t&&(b.close(),console.log("Successful authentication! You may now close this window!")),10===c.op&&b.send(JSON.stringify({op:2,d:{token:TOKEN,properties:{$browser:"b1nzy is a meme"},large_threshold:50}}))}catch(a){console.error(a)}}});';
 //            echo 'alert("yo3")';
 //            $discord = app(DiscordClient::class);
-            $discord = request()->session()->get("discord");
-            $discord->setClient(new Discord\ApiClient(request()->session()->get("apiclient")));
-            echo "<script> console.log('" . request()->session()->get('yo') . "')</script>";
-//            echo "yo : " . (request()->session()->exists("discord") ? "true" : "false");
-            foreach (request()->session()->get("discord")->guilds() as $guild){
+            $apiclient = app(Discord\ApiClient::class);
+            $discord = new Discord($apiclient);
+            foreach ($discord->guilds() as $guild){
                 if ($guild->id == intval($_GET['guild_id'])){
                     app(Discord\Bots\HandlesBotAddedToGuild::class)->botAdded($guild);
                 }
