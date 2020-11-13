@@ -19,8 +19,19 @@ class LoginController extends Controller
      */
     public function redirectToProvider()
     {
-        echo "yoyo";
+        echo "Logging in with discord using Socialite";
         return Socialite::driver('discord')->scopes(['guilds'] )->redirect();
+    }
+
+    public function loginCallback()
+    {
+        $user = Socialite::driver('discord')->user();
+//        var_dump($user);
+
+        $apiclient = new Discord\ApiClient($user->token);
+        $discord = new Discord($apiclient);
+
+        return view('home.index');
     }
 
     /**
@@ -30,30 +41,13 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-        Discord::setCallbackUrl("http://discordmanager.test");
-        $user = Socialite::driver('discord')->user();
-
-
-
-        $apiclient = new Discord\ApiClient($user->token);
-        request()->session()->put("apiclient", $user->token);
+//        $user = Socialite::driver('discord')->user();
+//        var_dump($user);
+        $apiclient = app(Discord\ApiClient::class);
         $discord = new Discord($apiclient);
-        session("discord", $discord);
-        request()->session()->put("discord", $discord);
+        var_dump(session('discord_token'));
+//        return true;
         $guilds = $discord->guilds();
-        echo "<pre>";
-//        var_dump($guilds);
-        echo "</pre>";
-
-        request()->session()->put("yo", "yoyo");
-        request()->session()->save();
-        //        echo "<script> console.log('" . request()->session()->get('yo') . "')</script>";
-
-//        echo "<script> console.log('" . request()->session()->get('yo') . "')</script>";
-
-
-
-//        echo "<script>alert('hello') </script>";
 
         foreach ($guilds as $guild) {
             if ($guild->id == 495147403683299330){
