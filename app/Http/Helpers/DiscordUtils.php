@@ -21,14 +21,34 @@ class DiscordUtils
         return false;
     }
 
-    public static function addGuildMembersRoles()
+    /**
+     * Add roles to members
+     * @param $guildId
+     * @param $usersId
+     * @param $rolesId
+     */
+    public static function addGuildMembersRoles($guildId, $usersId, $rolesId)
     {
-
+        foreach ($usersId as $userId) {
+            foreach ($rolesId as $roleId) {
+                app(DiscordClient::class)->guild->addGuildMemberRole(['guild.id' => $guildId, 'user.id'=>$userId, 'role.id'=>$roleId]);
+            }
+        }
     }
 
-    public static function removeGuildMembersRoles()
+    /**
+     * Remove roles to members
+     * @param $guildId
+     * @param $usersId
+     * @param $rolesId
+     */
+    public static function removeGuildMembersRoles($guildId, $usersId, $rolesId)
     {
-
+        foreach ($usersId as $userId) {
+            foreach ($rolesId as $roleId) {
+                app(DiscordClient::class)->guild->removeGuildMemberRole(['guild.id' => $guildId, 'user.id'=>$userId, 'role.id'=>$roleId]);
+            }
+        }
     }
 
     public static function removeGuildMembers()
