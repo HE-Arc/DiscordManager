@@ -22,18 +22,20 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="navbar-nav ml-auto">
-            @if (Route::has('home'))
+            @if (Session::has('discord_token'))
+                @if (Route::has('home'))
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route("home")}}">Home <i class="fas fa-home"></i></a>
+                    </li>
+                @endif
+                    <li class="nav-item active">
+                        <a class="nav-link" href=""> <i class="fas fa-home"></i></a>
+                    </li>
+            @else
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{route("home")}}">Home <i class="fas fa-home"></i></a>
+                    <a class="nav-link" href="{{route("login")}}">Login with Discord <i class="fab fa-discord"></i></a>
                 </li>
             @endif
-
-            <li class="nav-item active">
-                <a class="nav-link" href="{{route("login")}}">Login with Discord <i class="fab fa-discord"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
         </ul>
     </nav>
 </header>
