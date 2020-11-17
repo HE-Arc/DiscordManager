@@ -18,7 +18,7 @@ Route::view("/welcome","welcome.index")->name("welcome");
 Route::get("/home", [HomeController::class, 'index'])->name("home");
 
 Route::get('/login', [LoginController::class, 'redirectToProvider'])->name("login");
-Route::get('/add-bot', [LoginController::class, 'handleProviderCallback'])->name("add-bot");
+Route::get('/add-bot/{id}',[LoginController::class, 'addBot'])->name("add-bot");
 
 //Route::redirect("/login-callback","/home");
 Route::get('/login-callback', [LoginController::class, 'loginCallback']);

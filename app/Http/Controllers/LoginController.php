@@ -55,6 +55,20 @@ class LoginController extends Controller
             }
         }
     }
+
+    public function addBot($id)
+    {
+        $apiclient = app(Discord\ApiClient::class);
+        $discord = new Discord($apiclient);
+        $guilds = $discord->guilds();
+
+        foreach ($guilds as $guild) {
+            if ($guild->id == $id){
+                $guild->sendUserToDiscordToAddBot(Discord\Permissions\Permission::ADMINISTRATOR, $guild->id);
+            }
+        }
+    }
+
     public function handleBotCallback(){
         if (isset($_GET['error'])){
             app(Discord\Bots\HandlesBotAddedToGuild::class)->botNotAdded($_GET['error']);
