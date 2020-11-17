@@ -29,10 +29,11 @@ class LoginController extends Controller
 
     public function loginCallback()
     {
+//        dd(Socialite::driver('discord')->user());
         DiscordProvider::$token = Socialite::driver('discord')->user()->token;
         event(new Login("bidon", null,false));
 
-        return view('home.index');
+        return redirect()->route("home");
     }
 
     /**

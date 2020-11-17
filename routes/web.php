@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\LoginController;
+use \App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +15,7 @@ use \App\Http\Controllers\LoginController;
 */
 Route::redirect("/","/welcome");
 Route::view("/welcome","welcome.index")->name("welcome");
-Route::view("/home","home.index")->name("home");
+Route::get("/home", [HomeController::class, 'index'])->name("home");
 
 Route::get('/login', [LoginController::class, 'redirectToProvider'])->name("login");
 Route::get('/add-bot', [LoginController::class, 'handleProviderCallback'])->name("add-bot");
