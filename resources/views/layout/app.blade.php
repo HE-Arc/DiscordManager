@@ -14,9 +14,9 @@
     <script src="https://kit.fontawesome.com/60010d6147.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body style="background-color:#2C2F33;">
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color:#23272A;">
         <a class="navbar-brand" href="#">Discord Manager</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
