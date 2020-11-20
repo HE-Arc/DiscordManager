@@ -22,6 +22,22 @@ class DiscordUtils
     }
 
     /**
+     * Check if the bot is in the specified guild with id
+     * @param $guildsId
+     * @return array
+     */
+    public static function isBotInGuilds($guildsId)
+    {
+        $inGuildList = array();
+        $guilds = app(DiscordClient::class)->user->getCurrentUserGuilds();
+        foreach ($guilds as $guild) {
+            foreach ($guildsId as $guildId)
+                if ($guild->id == $guildId) array_push($inGuildList, $guild->id);
+        }
+        return $inGuildList;
+    }
+
+    /**
      * Add roles to members
      * @param $guildId
      * @param $usersId
@@ -31,7 +47,7 @@ class DiscordUtils
     {
         foreach ($usersId as $userId) {
             foreach ($rolesId as $roleId) {
-                app(DiscordClient::class)->guild->addGuildMemberRole(['guild.id' => $guildId, 'user.id'=>$userId, 'role.id'=>$roleId]);
+                app(DiscordClient::class)->guild->addGuildMemberRole(['guild.id' => $guildId, 'user.id' => $userId, 'role.id' => $roleId]);
             }
         }
     }
@@ -46,23 +62,33 @@ class DiscordUtils
     {
         foreach ($usersId as $userId) {
             foreach ($rolesId as $roleId) {
-                app(DiscordClient::class)->guild->removeGuildMemberRole(['guild.id' => $guildId, 'user.id'=>$userId, 'role.id'=>$roleId]);
+                app(DiscordClient::class)->guild->removeGuildMemberRole(['guild.id' => $guildId, 'user.id' => $userId, 'role.id' => $roleId]);
             }
         }
     }
 
-    public static function removeGuildMembers()
+    /**
+     * @param $guildId
+     * @param $usersId
+     */
+    public static function removeGuildMembers($guildId, $usersId)
     {
-
+        foreach ($usersId as $userId) {
+            app(DiscordClient::class)->guild->removeGuildMember(['guild.id' => $guildId, 'user.id' => $userId]);
+        }
     }
 
-    public static function createGuildBans()
+    public static function createGuildBans($guildId, $usersId, $reason = "", $deleteMessageDays = 0)
     {
-
+        foreach ($usersId as $userId) {
+            app(DiscordClient::class)->guild->createGuildBan(['guild.id' => $guildId, 'user.id' => $userId]);
+        }
     }
 
-    public static function removeGuildBans()
+    public static function removeGuildBans($guildId, $usersId)
     {
-
+        foreach ($usersId as $userId) {
+            app(DiscordClient::class)->guild->removeGuildBan(['guild.id' => $guildId, 'user.id' => $userId]);
+        }
     }
 }
