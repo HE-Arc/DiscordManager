@@ -37,8 +37,8 @@
                                 alt="Image de profil"
                                 class="rounded-circle" style="height: 25px; ">
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{route("logout")}}">Logout</a>
+                        <div class="dropdown-menu bg-danger" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item bg-danger text-white" href="{{route("logout")}}">Logout</a>
                         </div>
                     </li>
             @else
