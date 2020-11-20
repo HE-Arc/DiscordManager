@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckConnected
 {
@@ -16,7 +17,8 @@ class CheckConnected
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->session()->has('discord_token'))
+//        if ($request->session()->has('discord_token'))
+        if (Auth::check())
             {
                 return $next($request);
             }

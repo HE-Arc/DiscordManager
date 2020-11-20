@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Helpers\DiscordUtils;
+use Illuminate\Support\Facades\Auth;
 use LaravelRestcord\Discord;
 use LaravelRestcord\Discord\ApiClient;
 use RestCord\DiscordClient;
@@ -15,6 +16,7 @@ class HomeController extends Controller
         $discord = new Discord($apiclient);
         $guilds = $discord->guilds();
 
+//        dd(Auth::user());
 //        $InGuildList = array_filter($discord->guilds(),function ($guild){
 //            return DiscordUtils::isBotInGuild($guild->id);
 //        });
