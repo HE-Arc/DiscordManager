@@ -2,8 +2,10 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Helpers\DiscordUtils;
 use LaravelRestcord\Discord;
 use LaravelRestcord\Discord\ApiClient;
+use RestCord\DiscordClient;
 
 class HomeController extends Controller
 {
@@ -13,8 +15,29 @@ class HomeController extends Controller
         $discord = new Discord($apiclient);
         $guilds = $discord->guilds();
 
-//        dd($guilds);
+//        $InGuildList = array_filter($discord->guilds(),function ($guild){
+//            return DiscordUtils::isBotInGuild($guild->id);
+//        });
+//        $NotInGuildList = array_filter($discord->guilds(),function ($guild){
+//            return !DiscordUtils::isBotInGuild($guild->id);
+//        });
+        $InGuildList = array();
+        $NotInGuildList = array();
+        $botGuilds = app(DiscordClient::class)->user->getCurrentUserGuilds();
 
-        return view('home.index', ["guilds"=>$guilds]);
+        foreach ($guilds as $guild) {
+            foreach ($botGuilds as $guildBot) {
+                if ($guild->id == $guildBot->id)
+                {
+                    array_push($InGuildList,$guild);
+                    continue;
+                }
+            }
+            array_push($NotInGuildList,$guild);
+            continue;
+
+        }
+
+        return view('home.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
     }
 }
