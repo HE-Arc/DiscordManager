@@ -23,7 +23,7 @@
                                         @if($guild->owner == true)
                                             <span class="badge badge-primary" style="background-color:#7289DA;">Owner</span>
                                         @endif
-                                        <a class="btn btn-primary btn-lg justify-content-right  " href="{{route("login")}}" role="button">WIP path</a>
+                                        <a class="btn btn-primary btn-lg justify-content-right  " href="{{route("dashboard")}}" role="button">WIP path</a>
                                     </a>
                                 </h5>
                             </li>

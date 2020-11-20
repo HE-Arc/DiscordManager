@@ -1,21 +1,21 @@
+
 @extends('layout.app')
 @section('content')
-
     <!-- Begin page content -->
     <main role="main" class="container-fluid pt-5 ">
         <div class="container-fluid ">
             <div class="row">
                 <div class="col">
                     <div class="jumbotron container-fluid h-100 ml-5 " style="border-radius: 0px ;" >
-                        <h1 class="display-4">Hello !</h1>
+                        <h1 class="display-4">HELLLLLLLLLLLLLLLLLO</h1>
                         <p class="lead">Bienvenue sur Discord Manager. Le meilleur gestionnaire de serveur Discord pour les administrateurs</p>
                         <hr class="my-4">
                         <p>Changer les pseudos de tout le monde en "coin-coin", faire un full-wipe des membres ou attribuez le rôle "Gros débile" en masse.
                             Avec Discord Manager tu peux ! Alors c'est vendu ? ;)</p>
                         <div class="d-flex justify-content-center align-items-center ">
-                        <a class="btn btn-primary btn-lg justify-content-center  " href="{{route("login")}}" role="button">LET'S F*CKING GOOOOOOOO</a>
+                            <a class="btn btn-primary btn-lg justify-content-center  " href="{{route("login")}}" role="button">LET'S F*CKING GOOOOOOOO</a>
 
-                    </div>
+                        </div>
                     </div>
                 </div>
 
