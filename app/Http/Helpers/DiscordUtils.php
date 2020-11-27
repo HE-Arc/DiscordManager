@@ -3,6 +3,8 @@
 
 namespace App\Http\Helpers;
 
+use GuzzleHttp\Command\Exception\CommandClientException;
+use http\Exception;
 use RestCord\DiscordClient;
 
 class DiscordUtils
@@ -78,17 +80,31 @@ class DiscordUtils
         }
     }
 
+    /**
+     * @param $guildId
+     * @param $usersId
+     * @param string $reason
+     * @param int $deleteMessageDays
+     */
     public static function createGuildBans($guildId, $usersId, $reason = "", $deleteMessageDays = 0)
     {
         foreach ($usersId as $userId) {
-            app(DiscordClient::class)->guild->createGuildBan(['guild.id' => $guildId, 'user.id' => $userId]);
+            app(DiscordClient::class)->guild->createGuildBan(['guild.id' => $guildId, 'user.id' => $userId, 'reason'=>$reason, 'delete_message_days' =>$deleteMessageDays]);
         }
     }
 
+    /**
+     * @param $guildId
+     * @param $usersId
+     */
     public static function removeGuildBans($guildId, $usersId)
     {
         foreach ($usersId as $userId) {
-            app(DiscordClient::class)->guild->removeGuildBan(['guild.id' => $guildId, 'user.id' => $userId]);
+            dd(app(DiscordClient::class)->guild->removeGuildBan(['guild.id' => $guildId, 'user.id' => $userId]));
         }
+    }
+
+    public static function handleDiscordException(CommandClientException $exception){
+
     }
 }

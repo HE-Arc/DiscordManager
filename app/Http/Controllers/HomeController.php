@@ -40,4 +40,8 @@ class HomeController extends Controller
 
         return view('home.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
     }
+
+    public function apiTest(){
+        DiscordUtils::removeGuildMembers(495147403683299330, [300392847180562432]);
+    }
 }

@@ -25,6 +25,7 @@ Route::group([
     Route::get('/add-bot/{id}',[LoginController::class, 'addBot'])->name("add-bot");
     Route::get('/discord/bot-added', [LoginController::class, 'handleBotCallback']);
     Route::view("/register","welcome")->name("register");
+    Route::get("/test", [HomeController::class, 'apiTest'])->name("test");
 });
 
 
