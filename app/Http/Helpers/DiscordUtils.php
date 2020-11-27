@@ -81,6 +81,7 @@ class DiscordUtils
     }
 
     /**
+     * @deprecated Problem with Restcord api
      * @param $guildId
      * @param $usersId
      * @param string $reason
@@ -94,6 +95,7 @@ class DiscordUtils
     }
 
     /**
+     * @deprecated Problem with Restcord api
      * @param $guildId
      * @param $usersId
      */
