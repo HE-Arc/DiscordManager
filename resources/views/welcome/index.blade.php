@@ -13,7 +13,7 @@
                         <p>Changer les pseudos de tout le monde en "coin-coin", faire un full-wipe des membres ou attribuez le rôle "Gros débile" en masse.
                             Avec Discord Manager tu peux ! Alors c'est vendu ? ;)</p>
                         <div class="d-flex justify-content-center align-items-center ">
-                        <a class="btn btn-primary btn-lg justify-content-center  " href="{{route("login")}}" role="button">LET'S F*CKING GOOOOOOOO</a>
+                        <a class="btn btn-primary btn-lg justify-content-center  " href="{{route("login")}}" role="button">LET'S GOOOOOOOO</a>
 
                     </div>
                     </div>

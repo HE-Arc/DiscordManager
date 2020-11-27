@@ -1,43 +1,35 @@
 
-@extends('layout.app')
-@section('content')
+@extends('layout.guildTitle')
+
+@section('content1')
+
     <!-- Begin page content -->
-    <main role="main" class="container-fluid pt-5 ">
-        <div class="container-fluid ">
-            <div class="row">
-                <div class="col">
-                    <div class="jumbotron container-fluid h-100 ml-5 " style="border-radius: 0px ;" >
-                        <h1 class="display-4">HELLLLLLLLLLLLLLLLLO</h1>
-                        <p class="lead">Bienvenue sur Discord Manager. Le meilleur gestionnaire de serveur Discord pour les administrateurs</p>
-                        <hr class="my-4">
-                        <p>Changer les pseudos de tout le monde en "coin-coin", faire un full-wipe des membres ou attribuez le rôle "Gros débile" en masse.
-                            Avec Discord Manager tu peux ! Alors c'est vendu ? ;)</p>
-                        <div class="d-flex justify-content-center align-items-center ">
-                            <a class="btn btn-primary btn-lg justify-content-center  " href="{{route("login")}}" role="button">LET'S F*CKING GOOOOOOOO</a>
 
-                        </div>
-                    </div>
+    <main role="main" class="container-fluid  " style=" background-color:#23272A; color : #FFFFFF; ">
+        <div class="container pl-0 ml-0  container-fluid" >
+            <div class="row " >
+                <div class="col-sm-4 pb-0 " style=" background-color:#23272A; color: #FFFFFF; ">
+
+                    <ul class="nav flex-column" style=" background-color:#23272A; color: #FFFFFF; ">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Active</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                    </ul>
                 </div>
+                <div class="col-sm-8" style="background-color:#2C2F33;">
+                    <h2>{{$guild->name}}</h2>
 
-                <div class="col">
-                    <div id="carouselExampleSlidesOnly " class="carousel slide  h-100 mr-5" data-ride="carousel">
-                        <div class="carousel-inner ">
-                            <div class="carousel-item active ">
-                                <img src="https://miro.medium.com/max/3840/1*bNYZYQisFmGr8TpCtCaPTQ.jpeg" style= "height:500px;" class="img d-block w-100 " alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://www.xda-developers.com/files/2018/11/discord-logo.jpg"  style= "height:500px;" class="img d-block w-100 " alt="...">
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
-
             </div>
         </div>
-
-
-
-
     </main>
 @endsection

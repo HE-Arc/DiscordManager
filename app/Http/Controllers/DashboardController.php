@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Helpers\DiscordUtils;
 use LaravelRestcord\Discord;
 use LaravelRestcord\Discord\ApiClient;
+use phpDocumentor\Reflection\Types\Integer;
 use RestCord\DiscordClient;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index($id)
     {
 //        $apiclient = app(ApiClient::class);
 //        $discord = new Discord($apiclient);
@@ -37,8 +38,8 @@ class DashboardController extends Controller
             continue;
 
         }*/
-
-        return view('dashboard.index');
+        $guild =  app(DiscordClient::class)->guild->getGuild(['guild.id'=>intval($id)]);
+        return view('dashboard.index',["guild"=>$guild]);
         //return view('dashboard.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
     }
 }
