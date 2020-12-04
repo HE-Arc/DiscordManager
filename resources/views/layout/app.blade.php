@@ -51,5 +51,6 @@
 </header>
 
 @yield('content')
+@yield('content1')
 </body>
 </html>

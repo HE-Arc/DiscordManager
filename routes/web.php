@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\LoginController;
 use \App\Http\Controllers\HomeController;
+use \App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,8 +25,10 @@ Route::group([
     Route::get("/home", [HomeController::class, 'index'])->name("home");
     Route::get('/add-bot/{id}',[LoginController::class, 'addBot'])->name("add-bot");
     Route::get('/discord/bot-added', [LoginController::class, 'handleBotCallback']);
+    Route::get('/dashboard/{id}', [DashboardController::class, 'index'])->name("dashboard");
     Route::get('/logout', [LoginController::class, 'logout'])->name("logout");
     Route::view("/register","welcome")->name("register");
+
 });
 
 
