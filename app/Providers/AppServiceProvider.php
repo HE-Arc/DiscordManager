@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Http\Helpers\BotAddedToDiscordGuild;
 use Illuminate\Support\ServiceProvider;
+use LaravelRestcord\Discord\Bots\HandlesBotAddedToGuild;
 
 class AppServiceProvider extends ServiceProvider
 {
+
     /**
      * Register any application services.
      *
@@ -14,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->bind(HandlesBotAddedToGuild::class, BotAddedToDiscordGuild::class);
     }
 
     /**
@@ -24,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $this->app->bind(HandlesBotAddedToGuild::class, BotAddedToDiscordGuild::class);
     }
 }
