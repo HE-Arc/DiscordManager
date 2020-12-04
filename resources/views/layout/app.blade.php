@@ -28,6 +28,9 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{{route("home")}}">Home <i class="fas fa-home"></i></a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route("test")}}">TEST API<i class="fab fa-discord"></i></a>
+                    </li>
                 @endif
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,6 +44,7 @@
                             <a class="dropdown-item bg-danger text-white" href="{{route("logout")}}">Logout</a>
                         </div>
                     </li>
+
             @else
                 <li class="nav-item active">
                     <a class="nav-link" href="{{route("login")}}">Login with Discord <i class="fab fa-discord"></i></a>

@@ -28,7 +28,7 @@ Route::group([
     Route::get('/dashboard/{id}', [DashboardController::class, 'index'])->name("dashboard");
     Route::get('/logout', [LoginController::class, 'logout'])->name("logout");
     Route::view("/register","welcome")->name("register");
-
+    Route::get("/test", [HomeController::class, 'apiTest'])->name("test");
 });
 
 
