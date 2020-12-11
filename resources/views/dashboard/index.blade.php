@@ -38,119 +38,13 @@
                             <li class="list-group-item"><strong>Signature
                                     Accommodations</strong>(1480m)
                             </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
-                            <li class="list-group-item"><strong>Signature
-                                    Accommodations</strong>(1480m)
-                            </li>
+                            @foreach ($member as $members)
+                                <li class="list-group-item" style="background-color:#23272A;">
+                                    <h5 >
+                                        {{$member->name}}
+                                    </h5>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
