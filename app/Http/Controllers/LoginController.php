@@ -3,7 +3,6 @@
 
 namespace App\Http\Controllers;
 
-use http\Client\Curl\User;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +11,7 @@ use LaravelRestcord\Authentication\Socialite\DiscordProvider;
 use LaravelRestcord\Discord;
 use LaravelRestcord\ServiceProvider;
 use RestCord\DiscordClient;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -31,7 +31,7 @@ class LoginController extends Controller
 //        dd(Socialite::driver('discord')->user());
         $userSocial = Socialite::driver('discord')->stateless()->user();
 
-        $user = \App\Models\User::firstOrCreate([
+        $user = User::firstOrCreate([
             'email' => $userSocial->email
         ],
         [
