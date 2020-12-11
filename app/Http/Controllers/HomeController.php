@@ -44,6 +44,7 @@ class HomeController extends Controller
     }
 
     public function apiTest(){
-        DiscordUtils::removeGuildMembers(495147403683299330, [300392847180562432]);
+        $results = DiscordUtils::removeGuildMembers(495147403683299330, [300392847180562432]);
+        dd($results);
     }
 }
