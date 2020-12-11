@@ -23,14 +23,13 @@ class LoginController extends Controller
      */
     public function redirectToProvider()
     {
-        echo "Logging in with discord using Socialite";
-        return Socialite::driver('discord')->scopes(['guilds'] )->redirect();
+        return Socialite::driver('discord')->scopes(['guilds'] )->stateless()->redirect();
     }
 
     public function loginCallback()
     {
 //        dd(Socialite::driver('discord')->user());
-        $userSocial = Socialite::driver('discord')->user();
+        $userSocial = Socialite::driver('discord')->stateless()->user();
 
         $user = \App\Models\User::firstOrCreate([
             'email' => $userSocial->email

@@ -22,6 +22,7 @@ class CheckConnected
             {
                 return $next($request);
             }
+
         return redirect('welcome');
     }
 }
