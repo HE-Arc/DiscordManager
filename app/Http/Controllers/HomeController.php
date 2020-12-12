@@ -44,7 +44,7 @@ class HomeController extends Controller
     }
 
     public function apiTest(){
-        $results = DiscordUtils::isBotInGuilds([495147403683299330, 311935685504532482, 411279916034818058, 770317124152328212, 783629810088804372]);
+        $results = DiscordUtils::isBotInGuild(95147403683299330);
         dd($results);
     }
 }

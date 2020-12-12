@@ -4,7 +4,6 @@
 namespace App\Http\Helpers;
 
 use GuzzleHttp\Command\Exception\CommandClientException;
-use http\Exception;
 use RestCord\DiscordClient;
 
 class DiscordUtils
@@ -16,11 +15,10 @@ class DiscordUtils
      */
     public static function isBotInGuild($guildId)
     {
-        $guilds = app(DiscordClient::class)->user->getCurrentUserGuilds();
-        foreach ($guilds as $guild) {
-            if ($guild->id == $guildId) return true;
-        }
-        return false;
+        $guilds = collect(app(DiscordClient::class)->user->getCurrentUserGuilds());
+        return $guilds->map(function ($guild) {
+            return $guild->id;
+        })->contains($guildId);
     }
 
     /**
@@ -30,18 +28,12 @@ class DiscordUtils
      */
     public static function isBotInGuilds($guildsId)
     {
-
         $guilds = collect(app(DiscordClient::class)->user->getCurrentUserGuilds());
-        $inGuildList = $guilds->map(function ($guild, $key) {
+        $inGuildList = $guilds->map(function ($guild) {
             return $guild->id;
         })->intersect($guildsId);
 
         return $inGuildList->all();
-//        foreach ($guilds as $guild) {
-//            foreach ($guildsId as $guildId)
-//                if ($guild->id == $guildId) array_push($inGuildList, $guild->id);
-//        }
-//        return $inGuildList;
     }
 
     /**
@@ -135,7 +127,7 @@ class DiscordUtils
     {
         $code = $exception->getResponse()->getStatusCode();
 
-        $result = [$code];
+        $result = [$code=>""];
         switch ($code) {
             case 403:
                 array_push($result, "Vous n'avez pas les permissions de faire cela !");
@@ -144,13 +136,10 @@ class DiscordUtils
                 array_push($result, "Votre session est probablement trop vielle essayez de vous reconnectez.");
                 break;
             case 429:
-                array_push($result, "Vous avez trop solicitez l'API discord veuillez resssayez plus tard");
-                break;
-            case 304:
-                array_push($result, "Rien n'a été modifier, c'est problablement déjà bon");
+                array_push($result, "Vous avez trop solicitez l'API discord veuillez resssayez plus tard.");
                 break;
             default:
-                array_push($result, "Erreur interne reessayez plus tard ou contactez un administrateur");
+                array_push($result, "Erreur interne réessayez plus tard ou contactez un administrateur");
         }
         return $result;
     }
