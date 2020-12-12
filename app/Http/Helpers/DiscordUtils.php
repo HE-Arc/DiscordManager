@@ -30,13 +30,18 @@ class DiscordUtils
      */
     public static function isBotInGuilds($guildsId)
     {
-        $inGuildList = array();
-        $guilds = app(DiscordClient::class)->user->getCurrentUserGuilds();
-        foreach ($guilds as $guild) {
-            foreach ($guildsId as $guildId)
-                if ($guild->id == $guildId) array_push($inGuildList, $guild->id);
-        }
-        return $inGuildList;
+
+        $guilds = collect(app(DiscordClient::class)->user->getCurrentUserGuilds());
+        $inGuildList = $guilds->map(function ($guild, $key) {
+            return $guild->id;
+        })->intersect($guildsId);
+
+        return $inGuildList->all();
+//        foreach ($guilds as $guild) {
+//            foreach ($guildsId as $guildId)
+//                if ($guild->id == $guildId) array_push($inGuildList, $guild->id);
+//        }
+//        return $inGuildList;
     }
 
     /**
