@@ -24,7 +24,6 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="navbar-nav ml-auto">
-{{--            @if (Session::has('discord_token'))--}}
             @if (\Illuminate\Support\Facades\Auth::check())
                 @if (Route::has('home'))
                     <li class="nav-item active">
@@ -58,5 +57,15 @@
 
 @yield('content')
 @yield('content1')
+<footer class="fixed-bottom w-75 mx-auto">
+    @if (Session::has('status'))
+        <div class="alert {{Session::get('status')}} alert-dismissible fade show" role="alert">
+            {{Session::get('status_msg')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+</footer>
 </body>
 </html>

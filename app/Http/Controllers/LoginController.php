@@ -26,27 +26,33 @@ class LoginController extends Controller
         return Socialite::driver('discord')->scopes(['guilds'] )->stateless()->redirect();
     }
 
-    public function loginCallback()
+    public function loginCallback(Request $request)
     {
-//        dd(Socialite::driver('discord')->user());
-        $userSocial = Socialite::driver('discord')->stateless()->user();
+        try {
+            if ($request->has('code'))
+            {
+                $userSocial = Socialite::driver('discord')->stateless()->user();
 
-        $user = User::firstOrCreate([
-            'email' => $userSocial->email
-        ],
-        [
-            'discord_id' => $userSocial->id,
-            'name' => $userSocial->name,
-            'image' => $userSocial->avatar,
-            'token' => $userSocial->token,
-            'refresh_token' => $userSocial->refreshToken,
-        ]);
+                $user = User::firstOrCreate([
+                    'email' => $userSocial->email
+                ],
+                    [
+                        'discord_id' => $userSocial->id,
+                        'name' => $userSocial->name,
+                        'image' => $userSocial->avatar,
+                        'token' => $userSocial->token,
+                        'refresh_token' => $userSocial->refreshToken,
+                    ]);
 
-        Auth::login($user,true);
-//        DiscordProvider::$token = Socialite::driver('discord')->user()->token;
-//        event(new Login("bidon", null,false));
-
-        return redirect()->route("home");
+                Auth::login($user,true);
+                return redirect()->route("home")->with(['status'=> 'alert-success','status_msg'=> 'Connexion réussie !']);
+            }
+            throw new \Exception($request->get("error_description"));
+        }
+        catch (\Exception $e)
+        {
+            return redirect()->route("welcome")->with(['status'=> 'alert-danger','status_msg'=> $e->getMessage()]);
+        }
     }
 
     public function logout()
