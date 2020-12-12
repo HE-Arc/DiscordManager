@@ -139,13 +139,13 @@ class DiscordUtils
                 array_push($result, "Votre session est probablement trop vielle essayez de vous reconnectez.");
                 break;
             case 429:
-                array_push($result, "Vous avez trop solicitez l'API discord veuillez resssayez plus tard");
+                array_push($result, "Vous avez trop solicité l'API discord veuillez resssayer plus tard");
                 break;
             case 304:
-                array_push($result, "Rien n'a été modifier, c'est problablement déjà bon");
+                array_push($result, "Rien n'a été modifié, c'est problablement déjà bon");
                 break;
             default:
-                array_push($result, "Erreur interne reessayez plus tard ou contactez un administrateur");
+                array_push($result, "Erreur interne réessayez plus tard ou contactez un administrateur");
         }
         return $result;
     }
