@@ -38,12 +38,17 @@ class DashboardController extends Controller
             continue;
 
         }*/
+        //TODO variable
         $guild =  app(DiscordClient::class)->guild->getGuild(['guild.id'=>intval($id)]);
-        $members = app(DiscordClient::class)->guild->listGuildMembers(['guild.id'=>intval($id)]);
+        $members = app(DiscordClient::class)->guild->listGuildMembers(['guild.id'=>intval($id),'limit'=>1000]);
+        $roles= app(DiscordClient::class)->guild->getGuildRoles(['guild.id'=>intval($id)]);
 
 
-
-        return view('dashboard.index',["guild"=>$guild,"member"=>$members]);
+        return view('dashboard.index',["guild"=>$guild,"members"=>$members,"roles"=>$roles]);
         //return view('dashboard.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
+    }
+    public function update()
+    {
+        var_dump($_POST);
     }
 }

@@ -1,13 +1,68 @@
-
-
 body{
-    background-color:#23272A;
+    background-color:#11272A;
+    height: 100%;
 }
-
+html{
+    height: 94%;
+}
 .list-group{
-    max-height: 300px;
+    max-height: 500px;
+    max-width: 400px;
     margin-bottom: 10px;
     overflow:scroll;
-    -webkit-overflow-scrolling: touch;
+
     background-color:#23272A;
+}
+.rounded-circle{
+    height: 50px;
+}
+canvas{
+    position:absolute;
+    left:-700px;
+    top:0;
+    z-index:-1;
+}
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    height: 100%;
+    overflow: auto;
+}
+.navbar{
+    background-color: #777777;
+
+}
+#dashboard{
+    height: 100%;
+}
+.sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.sidebar a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+}
+
+
+#insidedb
+{
+    margin-top: 2%;
+
 }
