@@ -84,8 +84,6 @@ class LoginController extends Controller
         $discord = new Discord($apiclient);
         $guilds = $discord->guilds();
 
-//        dd($guilds);
-
         foreach ($guilds as $guild) {
             if ($guild->id == 495147403683299330){
                 $guild->sendUserToDiscordToAddBot(Discord\Permissions\Permission::ADMINISTRATOR, $guild->id);
@@ -110,16 +108,6 @@ class LoginController extends Controller
         if (isset($_GET['error'])){
             app(Discord\Bots\HandlesBotAddedToGuild::class)->botNotAdded($_GET['error']);
         }else{
-//            echo "<script>alert('yo2')</script>";
-//            echo '<script>';
-//            echo '"use strict";';
-//            echo 'var TOKEN="'. $_GET['code'] . '";';
-//            echo 'fetch("https://discord.com/api/v7/gateway")
-//            .then(function(a){return a.json()})
-//            .then(function(a){var b=new WebSocket(a.url+"/?encoding=json&v=6");
-//            b.onerror=function(a){return console.error(a)},b.onmessage=function(a){try{var c=JSON.parse(a.data);0===c.op&&"READY"===c.t&&(b.close(),console.log("Successful authentication! You may now close this window!")),10===c.op&&b.send(JSON.stringify({op:2,d:{token:TOKEN,properties:{$browser:"b1nzy is a meme"},large_threshold:50}}))}catch(a){console.error(a)}}});';
-//            echo 'alert("yo3")';
-//            $discord = app(DiscordClient::class);
             $apiclient = app(Discord\ApiClient::class);
             $discord = new Discord($apiclient);
             foreach ($discord->guilds() as $guild){
@@ -127,10 +115,6 @@ class LoginController extends Controller
                     app(Discord\Bots\HandlesBotAddedToGuild::class)->botAdded($guild);
                 }
             }
-
-//            echo '</script>';
-//            echo $_GET['code'];
-            //app(DiscordClient::class)->guild->createGuildRole(['guild.id' => intval($_GET['guild_id']), 'name'=>'yorole']);
         }
     }
 }
