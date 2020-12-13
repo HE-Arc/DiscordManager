@@ -16,8 +16,13 @@ use \App\Http\Controllers\DashboardController;
 */
 Route::redirect("/","/welcome");
 Route::view("/welcome","welcome.index")->name("welcome");
-Route::get('/login', [LoginController::class, 'redirectToProvider'])->name("login");
-Route::get('/login-callback', [LoginController::class, 'loginCallback']);
+
+Route::group([
+    'middleware' => ['redirectIfAuth']
+], function (){
+    Route::get('/login', [LoginController::class, 'redirectToProvider'])->name("login");
+    Route::get('/login-callback', [LoginController::class, 'loginCallback']);
+});
 
 Route::group([
     'middleware' => ['auth','refresh','sessionHasDiscordToken']
