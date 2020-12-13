@@ -36,6 +36,10 @@ class CheckIfDiscordTokenValid
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
+            if (!$this->session->has('discord_token'))
+            {
+                $this->session->put('discord_token',Auth::user()->token);
+            }
 
             $user = User::where('discord_id',  Auth::user()->discord_id)->first();
 
