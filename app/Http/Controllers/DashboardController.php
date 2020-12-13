@@ -47,4 +47,8 @@ class DashboardController extends Controller
         return view('dashboard.index',["guild"=>$guild,"members"=>$members,"roles"=>$roles]);
         //return view('dashboard.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
     }
+    public function update()
+    {
+        var_dump($_POST);
+    }
 }
