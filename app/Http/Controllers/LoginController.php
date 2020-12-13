@@ -3,7 +3,6 @@
 
 namespace App\Http\Controllers;
 
-use http\Client\Curl\User;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +11,7 @@ use LaravelRestcord\Authentication\Socialite\DiscordProvider;
 use LaravelRestcord\Discord;
 use LaravelRestcord\ServiceProvider;
 use RestCord\DiscordClient;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -26,24 +26,45 @@ class LoginController extends Controller
         return Socialite::driver('discord')->scopes(['guilds'] )->stateless()->redirect();
     }
 
-    public function loginCallback()
+    public function loginCallback(Request $request)
     {
-//        dd(Socialite::driver('discord')->user());
-        $userSocial = Socialite::driver('discord')->stateless()->user();
+//        dd(Socialite::driver('discord')->stateless()->user());
+        try {
+            if ($request->has('code'))
+            {
+                $userSocial = Socialite::driver('discord')->stateless()->user();
+//                dd($userSocial);
+//                $user = User::firstOrCreate([
+//                    'email' => $userSocial->email
+//                ],
+//                    [
+//                        'discord_id' => $userSocial->id,
+//                        'name' => $userSocial->name,
+//                        'image' => $userSocial->avatar,
+//                        'token' => $userSocial->token,
+//                        'refresh_token' => $userSocial->refreshToken,
+//                    ]);
 
-        $user = \App\Models\User::firstOrCreate([
-            'email' => $userSocial->email
-        ],
-        [
-            'discord_id' => $userSocial->id,
-            'name' => $userSocial->name,
-            'image' => $userSocial->avatar,
-            'token' => $userSocial->token,
-            'refresh_token' => $userSocial->refreshToken,
-        ]);
+                $user = User::firstOrNew([
+                    'discord_id' => $userSocial->id
+                ]);
+                $user->email = $userSocial->email;
+                $user->name = $userSocial->name;
+                $user->image = $userSocial->avatar;
+                $user->token = $userSocial->token;
+                $user->refresh_token = $userSocial->refreshToken;
+                $user->expires_in = $userSocial->expiresIn;
+                $user->save();
 
-        Auth::login($user,true);
-        return redirect()->route("home");
+                Auth::login($user,true);
+                return redirect()->route("home")->with(['status'=> 'alert-success','status_msg'=> 'Connexion réussie !']);
+            }
+            throw new \Exception($request->get("error_description"));
+        }
+        catch (\Exception $e)
+        {
+            return redirect()->route("welcome")->with(['status'=> 'alert-danger','status_msg'=> $e->getMessage()]);
+        }
     }
 
     public function logout()
