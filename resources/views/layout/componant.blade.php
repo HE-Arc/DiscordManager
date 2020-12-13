@@ -14,9 +14,9 @@
         </button>
         <ul class="navbar-nav ml-auto">
             @if (\Illuminate\Support\Facades\Auth::check())
-                @if (Route::has('home'))
+                @if (Route::has('dashboard'))
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{route("home")}}">Home <i class="fas fa-home"></i></a>
+                        <a class="nav-link" href="{{route("dashboard")}}">Dashboard <i class="fas fa-home"></i></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{{route("test")}}">TEST API<i class="fab fa-discord"></i></a>

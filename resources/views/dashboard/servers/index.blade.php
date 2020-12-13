@@ -11,7 +11,7 @@
                         @foreach ($InGuildList as $guild)
                             <li class="list-group-item" >
                                 <h5 >
-                                    <a href="{{route("dashboard",$guild->id)}}">
+                                    <a href="{{route("dashboard.server",$guild->id)}}">
                                         <img
                                             @if($guild->icon != null)
                                             src="https://cdn.discordapp.com/icons/{{$guild->id}}/{{$guild->icon}}.png"

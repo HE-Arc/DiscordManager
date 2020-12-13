@@ -30,40 +30,8 @@
 
 @section('sidebar')
     <div class="sidebar">
-{{--        <a class="active" href="#home">Home</a>--}}
-{{--        <a href="#news">News</a>--}}
-{{--        <a href="#contact">Contact</a>--}}
-{{--        <a href="#about">About</a>--}}
-{{--        <a href="#about">@yield('yo')</a>--}}
-        <ul class=" list-group list-group-flush">
-            @foreach ($InGuildList as $guild)
-                <li class="list-group-item" >
-                    <h5 >
-                        <a href="{{route("dashboard",$guild->id)}}">
-                            <img
-                                @if($guild->icon != null)
-                                src="https://cdn.discordapp.com/icons/{{$guild->id}}/{{$guild->icon}}.png"
-                                @else
-                                src="https://cdn.discordapp.com/app-icons/761513537825669130/6436659f90801b9ac8b9a5e7dac56bfb.png"
-                                @endif
-                                alt="Image de guilde"
-                                class="rounded-circle ">
-                            {{$guild->name}}
-
         <a>@yield('guildtitle')</a>
         <a  href="#home">Members</a>
-
-
-                            @if($guild->owner == true)
-                                <span class="badge badge-primary" >Owner</span>
-                            @endif
-                        </a>
-                    </h5>
-                </li>
-            @endforeach
-
-        </ul>
-
     </div>
 @endsection
 @section('openbody')

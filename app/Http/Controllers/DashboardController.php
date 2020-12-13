@@ -13,7 +13,8 @@ use function PHPUnit\Framework\isEmpty;
 
 class DashboardController extends Controller
 {
-    public function index()
+    //Affiche la page listant les serveurs (anciennement home)
+    public function servers()
     {
         $apiclient = app(ApiClient::class);
         $discord = new Discord($apiclient);
@@ -36,7 +37,7 @@ class DashboardController extends Controller
 
         }
 
-        return view('dashboard.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
+        return view('dashboard.servers.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
     }
 
     public function server($id)
@@ -94,6 +95,13 @@ class DashboardController extends Controller
             $request->id,
             $request->input('usersId'));
         if(!isEmpty($result)) dd($result);
+    }
+
+    public function apiTest(){
+//        $results = DiscordUtils::removeGuildMembers(495147403683299330, [300392847180562432]);
+        $botId = app(DiscordClient::class)->user->getCurrentUser()->id;
+        $botMember = DiscordUtils::listAddableRoles(495147403683299330);
+        dd($botMember);
     }
 
 }
