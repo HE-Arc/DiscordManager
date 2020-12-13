@@ -48,7 +48,7 @@ class DiscordUtils
         foreach ($usersId as $userId) {
             foreach ($rolesId as $roleId) {
                 try {
-                    app(DiscordClient::class)->guild->addGuildMemberRole(['guild.id' => $guildId, 'user.id' => $userId, 'role.id' => $roleId]);
+                    app(DiscordClient::class)->guild->addGuildMemberRole(['guild.id' => intval($guildId), 'user.id' => intval($userId), 'role.id' => intval($roleId)]);
                 } catch (CommandClientException $exception) {
                     $results[$userId] = self::handleDiscordException($exception);
                 }
@@ -88,7 +88,7 @@ class DiscordUtils
         $results = [];
         foreach ($usersId as $userId) {
             try {
-                app(DiscordClient::class)->guild->removeGuildMember(['guild.id' => $guildId, 'user.id' => $userId]);
+                app(DiscordClient::class)->guild->removeGuildMember(['guild.id' => intval($guildId), 'user.id' => intval($userId)]);
             } catch (CommandClientException $exception) {
                 $results[$userId] = self::handleDiscordException($exception);
             }
@@ -135,6 +135,7 @@ class DiscordUtils
 
     public static function handleDiscordException(CommandClientException $exception)
     {
+        dd($exception);
         $code = $exception->getResponse()->getStatusCode();
 
         $result = [$code=>""];

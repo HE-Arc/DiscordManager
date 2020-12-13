@@ -1,54 +1,73 @@
 <?php
+
 namespace App\Http\Controllers;
 
 
 use App\Http\Helpers\DiscordUtils;
+use Illuminate\Http\Request;
 use LaravelRestcord\Discord;
 use LaravelRestcord\Discord\ApiClient;
 use phpDocumentor\Reflection\Types\Integer;
 use RestCord\DiscordClient;
+use function PHPUnit\Framework\isEmpty;
 
 class DashboardController extends Controller
 {
     public function index($id)
     {
-//        $apiclient = app(ApiClient::class);
-//        $discord = new Discord($apiclient);
-//        $guilds = $discord->guilds();
-
-//        $InGuildList = array_filter($discord->guilds(),function ($guild){
-//            return DiscordUtils::isBotInGuild($guild->id);
-//        });
-//        $NotInGuildList = array_filter($discord->guilds(),function ($guild){
-//            return !DiscordUtils::isBotInGuild($guild->id);
-//        });
-//        $InGuildList = array();
-//        $NotInGuildList = array();
-//        $botGuilds = app(DiscordClient::class)->user->getCurrentUserGuilds();
-/*
-        foreach ($guilds as $guild) {
-            foreach ($botGuilds as $guildBot) {
-                if ($guild->id == $guildBot->id)
-                {
-                    array_push($InGuildList,$guild);
-                    continue;
-                }
-            }
-            array_push($NotInGuildList,$guild);
-            continue;
-
-        }*/
-        //TODO variable
-        $guild =  app(DiscordClient::class)->guild->getGuild(['guild.id'=>intval($id)]);
-        $members = app(DiscordClient::class)->guild->listGuildMembers(['guild.id'=>intval($id),'limit'=>1000]);
-        $roles= app(DiscordClient::class)->guild->getGuildRoles(['guild.id'=>intval($id)]);
+        //TODO variable app(discord)
+        $guild = app(DiscordClient::class)->guild->getGuild(['guild.id' => intval($id)]);
+        $members = app(DiscordClient::class)->guild->listGuildMembers(['guild.id' => intval($id), 'limit' => 1000]);
+        $roles = app(DiscordClient::class)->guild->getGuildRoles(['guild.id' => intval($id)]);
 
 
-        return view('dashboard.index',["guild"=>$guild,"members"=>$members,"roles"=>$roles]);
+        return view('dashboard.index', ["guild" => $guild, "members" => $members, "roles" => $roles]);
         //return view('dashboard.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
     }
-    public function update()
+
+    public function update(Request $request)
     {
-        var_dump($_POST);
+        if($request->has('action')){
+            switch ($request->get('action')) {
+                case "addRoles":
+                    if($request->has(['rolesId', 'usersId'])) $this->addRoles($request);
+                    break;
+                case "removeRoles":
+                    if($request->has(['rolesId', 'usersId'])) $this->removeRoles($request);
+                    break;
+                case "kick":
+                    $this->kick($request);
+                    break;
+                default:
+            }
+        }
+
     }
+
+    private function addRoles(Request $request)
+    {
+        $result = DiscordUtils::addGuildMembersRoles(
+            $request->get('id'),
+            $request->input('usersId'),
+            $request->input('rolesId'));
+        if(isEmpty($result)) dd($result);
+    }
+
+    private function removeRoles(Request $request)
+    {
+        $result = DiscordUtils::removeGuildMembersRoles(
+            $request->get('id'),
+            $request->input('usersId'),
+            $request->input('rolesId'));
+        if(isEmpty($result)) dd($result);
+    }
+
+    private function kick(Request $request)
+    {
+        $result = DiscordUtils::removeGuildMembers(
+            $request->id,
+            $request->input('usersId'));
+        if(!isEmpty($result)) dd($result);
+    }
+
 }
