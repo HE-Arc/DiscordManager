@@ -28,21 +28,33 @@ class LoginController extends Controller
 
     public function loginCallback(Request $request)
     {
+//        dd(Socialite::driver('discord')->stateless()->user());
         try {
             if ($request->has('code'))
             {
                 $userSocial = Socialite::driver('discord')->stateless()->user();
+//                dd($userSocial);
+//                $user = User::firstOrCreate([
+//                    'email' => $userSocial->email
+//                ],
+//                    [
+//                        'discord_id' => $userSocial->id,
+//                        'name' => $userSocial->name,
+//                        'image' => $userSocial->avatar,
+//                        'token' => $userSocial->token,
+//                        'refresh_token' => $userSocial->refreshToken,
+//                    ]);
 
-                $user = User::firstOrCreate([
-                    'email' => $userSocial->email
-                ],
-                    [
-                        'discord_id' => $userSocial->id,
-                        'name' => $userSocial->name,
-                        'image' => $userSocial->avatar,
-                        'token' => $userSocial->token,
-                        'refresh_token' => $userSocial->refreshToken,
-                    ]);
+                $user = User::firstOrNew([
+                    'discord_id' => $userSocial->id
+                ]);
+                $user->email = $userSocial->email;
+                $user->name = $userSocial->name;
+                $user->image = $userSocial->avatar;
+                $user->token = $userSocial->token;
+                $user->refresh_token = $userSocial->refreshToken;
+                $user->expires_in = $userSocial->expiresIn;
+                $user->save();
 
                 Auth::login($user,true);
                 return redirect()->route("home")->with(['status'=> 'alert-success','status_msg'=> 'Connexion réussie !']);

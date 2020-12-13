@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\CheckConnected;
+use App\Http\Middleware\CheckIfDiscordTokenValid;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'refresh' => \App\Http\Middleware\CheckIfDiscordTokenValid::class,
 //        'sessionHasDiscordToken' => \LaravelRestcord\Http\Middleware\InstantiateApiClientWithTokenFromSession::class,
     ];
 }

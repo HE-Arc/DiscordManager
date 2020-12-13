@@ -24,6 +24,7 @@ class User extends Authenticatable
         'image',
         'token',
         'refresh_token',
+        'expires_in',
     ];
 
     /**

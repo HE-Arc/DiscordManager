@@ -20,7 +20,7 @@ Route::get('/login', [LoginController::class, 'redirectToProvider'])->name("logi
 Route::get('/login-callback', [LoginController::class, 'loginCallback']);
 
 Route::group([
-    'middleware' => ['auth','sessionHasDiscordToken']
+    'middleware' => ['auth','refresh','sessionHasDiscordToken']
 ], function (){
     Route::get("/home", [HomeController::class, 'index'])->name("home");
     Route::get('/add-bot/{id}',[LoginController::class, 'addBot'])->name("add-bot");
