@@ -1,6 +1,7 @@
 @extends('layout.app')
 @section('content')
-
+    @include('welcome.component')
+    @yield('banner')
     <!-- welcome -->
     <main role="main" class="container-fluid pt-5 ">
         <div class="container-fluid ">

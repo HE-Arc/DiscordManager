@@ -1,5 +1,6 @@
 @extends('layout.app')
 @section('content')
+    @include('layout.componant')
     <!-- home -->
     <main role="main" class="container mt-5">
         <div class="container">
