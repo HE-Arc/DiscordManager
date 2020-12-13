@@ -4,6 +4,7 @@
     @include('dashboard.component')
     <div class="row " id="dashboard">
         <div class="col-2">
+
             @yield('sidebar')
         </div>
 
