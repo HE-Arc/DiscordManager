@@ -44,7 +44,8 @@ class HomeController extends Controller
     }
 
     public function apiTest(){
-        $results = DiscordUtils::isBotInGuild(95147403683299330);
-        dd($results);
+//        $results = DiscordUtils::removeGuildMembers(495147403683299330, [300392847180562432]);
+        $members = app(DiscordClient::class)->guild->getGuildRoles(['guild.id' => 495147403683299330]);
+        dd($members);
     }
 }

@@ -75,6 +75,7 @@ class DiscordUtils
                 }
             }
         }
+
         return $results;
     }
 
@@ -130,16 +131,16 @@ class DiscordUtils
         $result = [$code=>""];
         switch ($code) {
             case 403:
-                array_push($result, "Vous n'avez pas les permissions de faire cela !");
+                $result[$code] = "Vous n'avez pas les permissions de faire cela !";
                 break;
             case 401:
-                array_push($result, "Votre session est probablement trop vielle essayez de vous reconnectez.");
+                $result[$code] = "Votre session est probablement trop vielle essayez de vous reconnectez.";
                 break;
             case 429:
-                array_push($result, "Vous avez trop solicitez l'API discord veuillez resssayez plus tard.");
+                $result[$code] = "Vous avez trop solicitez l'API discord veuillez resssayez plus tard.";
                 break;
             default:
-                array_push($result, "Erreur interne réessayez plus tard ou contactez un administrateur");
+                $result[$code] = "Erreur interne réessayez plus tard ou contactez un administrateur";
         }
         return $result;
     }

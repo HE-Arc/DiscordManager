@@ -3,6 +3,7 @@
 
 namespace App\Http\Helpers;
 
+use Illuminate\Support\Facades\Session;
 use LaravelRestcord\Discord\Bots\HandlesBotAddedToGuild;
 use Illuminate\Http\RedirectResponse;
 use LaravelRestcord\Discord\Guild;
@@ -14,18 +15,6 @@ class BotAddedToDiscordGuild
 
     public function botAdded(Guild $guild) : RedirectResponse
     {
-        // do something with the guild information the bot was added to
-//        echo "<script>alert('youpie')</script>";
-//        echo '<script>';
-//        echo '"use strict";';
-//        echo 'var TOKEN="'. "TOKEN LOL" . '";';
-//        echo 'fetch("https://discord.com/api/v7/gateway")
-//            .then(function(a){return a.json()})
-//            .then(function(a){var b=new WebSocket(a.url+"/?encoding=json&v=6");
-//            b.onerror=function(a){return console.error(a)},b.onmessage=function(a){try{var c=JSON.parse(a.data);0===c.op&&"READY"===c.t&&(b.close(),console.log("Successful authentication! You may now close this window!")),10===c.op&&b.send(JSON.stringify({op:2,d:{token:TOKEN,properties:{$browser:"b1nzy is a meme"},large_threshold:50}}))}catch(a){console.error(a)}}});';
-//        echo '</script>';
-
-        var_dump(app(DiscordClient::class)->user->getCurrentUserGuilds());
         return redirect('/yo');
     }
 
