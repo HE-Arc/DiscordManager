@@ -124,6 +124,15 @@ class DiscordUtils
         }
     }
 
+    public static function listWorkableRoles($guildId){
+        $botId = app(DiscordClient::class)->user->getCurrentUser()->id;
+        $botRoles = app(DiscordClient::class)->guild->getGuildMember(['guild.id' => $guildId, 'user.id' => $botId])->roles;
+        $roles = collect(app(DiscordClient::class)->guild->getGuildRoles(['guild.id' => $guildId]));
+        $maxBotRolesPosition = $roles->whereIn('id', $botRoles)->max('position');
+        $filteredRoles = $roles->where('managed', false)->whereBetween('position', [0, $maxBotRolesPosition]);
+        return $filteredRoles->all();
+    }
+
     public static function handleDiscordException(CommandClientException $exception)
     {
         $code = $exception->getResponse()->getStatusCode();
