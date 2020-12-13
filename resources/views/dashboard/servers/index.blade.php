@@ -11,6 +11,7 @@
                         @foreach ($InGuildList as $guild)
                             <li class="list-group-item" >
                                 <h5 >
+<<<<<<< Updated upstream:resources/views/dashboard/servers/index.blade.php
                                     <a href="{{route("dashboard.server",$guild->id)}}">
                                         <img
                                             @if($guild->icon != null)
@@ -20,6 +21,10 @@
                                             @endif
                                             alt="Image de guilde"
                                             class="rounded-circle ">
+=======
+                                    <a href="{{route("dashboard",$guild->id)}}">
+                                        @yield('img')
+>>>>>>> Stashed changes:resources/views/home/index.blade.php
                                         {{$guild->name}}
 
                                         @if($guild->owner == true)
