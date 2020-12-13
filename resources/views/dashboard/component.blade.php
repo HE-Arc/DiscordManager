@@ -30,11 +30,8 @@
 
 @section('sidebar')
     <div class="sidebar">
-
         <a>@yield('guildtitle')</a>
         <a  href="#home">Members</a>
-
-
     </div>
 @endsection
 @section('openbody')

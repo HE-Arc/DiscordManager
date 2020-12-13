@@ -13,17 +13,26 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="navbar-nav ml-auto">
-            @if (Session::has('discord_token'))
-                @if (Route::has('home'))
+            @if (\Illuminate\Support\Facades\Auth::check())
+                @if (Route::has('dashboard'))
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{route("home")}}">Home <i class="fas fa-home"></i></a>
+                        <a class="nav-link" href="{{route("dashboard")}}">Dashboard <i class="fas fa-home"></i></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{{route("test")}}">TEST API<i class="fab fa-discord"></i></a>
                     </li>
                 @endif
-                <li class="nav-item active">
-                    <a class="nav-link" href=""> <i class="fas fa-home"></i></a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{\Illuminate\Support\Facades\Auth::user()->name}}
+                        <img
+                            src="{{\Illuminate\Support\Facades\Auth::user()->image}}"
+                            alt="Image de profil"
+                            class="rounded-circle" style="height: 25px; ">
+                    </a>
+                    <div class="dropdown-menu bg-danger" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item bg-danger text-white" href="{{route("logout")}}">Logout</a>
+                    </div>
                 </li>
 
             @else

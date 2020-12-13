@@ -16,7 +16,7 @@
                         <ul class="list-group list-group-flush">
                             @foreach ($members as $member)
                                 <li class="list-group-item">
-                                    <input type="checkbox" name="usernames[]" value="{{$member ->user->id}}">
+                                    <input type="checkbox" name="usersId[]" value="{{$member ->user->id}}">
                                     {{$member ->user->username}}
                                     @if($member->nick != null)
                                         ({{$member->nick}})
@@ -29,12 +29,12 @@
 
                         <ul class="w3-ul ">
                             <li class="list-group-item">
-                                <input type="radio" name="action" value="remove" checked onclick="document.getElementById('role_list').style.visibility = 'visible';">
-                                remove role
+                                <input type="radio" name="action" value="addRoles" checked onclick="document.getElementById('role_list').style.visibility = 'visible';">
+                                add role
                             </li>
                             <li class="list-group-item">
-                                <input type="radio" name="action" value="add" onclick="document.getElementById('role_list').style.visibility = 'visible';">
-                                add role
+                                <input type="radio" name="action" value="removeRoles" onclick="document.getElementById('role_list').style.visibility = 'visible';">
+                                remove role
                             </li>
                             <li class="list-group-item">
                                 <input type="radio" name="action" value="kick" onclick="document.getElementById('role_list').style.visibility = 'hidden';">
@@ -47,7 +47,7 @@
                         <ul class="list-group list-group-flush">
                             @foreach ($roles as $role)
                                 <li class="list-group-item">
-                                    <input type="checkbox" name="rolenames[]" value="{{$role ->id}}">
+                                    <input type="checkbox" name="rolesId[]" value="{{$role ->id}}">
                                     {{$role ->name}}
                                 </li>
                             @endforeach

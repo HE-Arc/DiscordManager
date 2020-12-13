@@ -4,7 +4,6 @@
 namespace App\Http\Helpers;
 
 use GuzzleHttp\Command\Exception\CommandClientException;
-use http\Exception;
 use RestCord\DiscordClient;
 
 class DiscordUtils
@@ -16,11 +15,10 @@ class DiscordUtils
      */
     public static function isBotInGuild($guildId)
     {
-        $guilds = app(DiscordClient::class)->user->getCurrentUserGuilds();
-        foreach ($guilds as $guild) {
-            if ($guild->id == $guildId) return true;
-        }
-        return false;
+        $guilds = collect(app(DiscordClient::class)->user->getCurrentUserGuilds());
+        return $guilds->map(function ($guild) {
+            return $guild->id;
+        })->contains($guildId);
     }
 
     /**
@@ -30,13 +28,12 @@ class DiscordUtils
      */
     public static function isBotInGuilds($guildsId)
     {
-        $inGuildList = array();
-        $guilds = app(DiscordClient::class)->user->getCurrentUserGuilds();
-        foreach ($guilds as $guild) {
-            foreach ($guildsId as $guildId)
-                if ($guild->id == $guildId) array_push($inGuildList, $guild->id);
-        }
-        return $inGuildList;
+        $guilds = collect(app(DiscordClient::class)->user->getCurrentUserGuilds());
+        $inGuildList = $guilds->map(function ($guild) {
+            return $guild->id;
+        })->intersect($guildsId);
+
+        return $inGuildList->all();
     }
 
     /**
@@ -51,7 +48,7 @@ class DiscordUtils
         foreach ($usersId as $userId) {
             foreach ($rolesId as $roleId) {
                 try {
-                    app(DiscordClient::class)->guild->addGuildMemberRole(['guild.id' => $guildId, 'user.id' => $userId, 'role.id' => $roleId]);
+                    app(DiscordClient::class)->guild->addGuildMemberRole(['guild.id' => intval($guildId), 'user.id' => intval($userId), 'role.id' => intval($roleId)]);
                 } catch (CommandClientException $exception) {
                     $results[$userId] = self::handleDiscordException($exception);
                 }
@@ -78,6 +75,7 @@ class DiscordUtils
                 }
             }
         }
+
         return $results;
     }
 
@@ -90,7 +88,7 @@ class DiscordUtils
         $results = [];
         foreach ($usersId as $userId) {
             try {
-                app(DiscordClient::class)->guild->removeGuildMember(['guild.id' => $guildId, 'user.id' => $userId]);
+                app(DiscordClient::class)->guild->removeGuildMember(['guild.id' => intval($guildId), 'user.id' => intval($userId)]);
             } catch (CommandClientException $exception) {
                 $results[$userId] = self::handleDiscordException($exception);
             }
@@ -126,26 +124,33 @@ class DiscordUtils
         }
     }
 
+    public static function listWorkableRoles($guildId){
+        $botId = app(DiscordClient::class)->user->getCurrentUser()->id;
+        $botRoles = app(DiscordClient::class)->guild->getGuildMember(['guild.id' => $guildId, 'user.id' => $botId])->roles;
+        $roles = collect(app(DiscordClient::class)->guild->getGuildRoles(['guild.id' => $guildId]));
+        $maxBotRolesPosition = $roles->whereIn('id', $botRoles)->max('position');
+        $filteredRoles = $roles->where('managed', false)->whereBetween('position', [0, $maxBotRolesPosition]);
+        return $filteredRoles->all();
+    }
+
     public static function handleDiscordException(CommandClientException $exception)
     {
+        dd($exception);
         $code = $exception->getResponse()->getStatusCode();
 
-        $result = [$code];
+        $result = [$code=>""];
         switch ($code) {
             case 403:
-                array_push($result, "Vous n'avez pas les permissions de faire cela !");
+                $result[$code] = "Vous n'avez pas les permissions de faire cela !";
                 break;
             case 401:
-                array_push($result, "Votre session est probablement trop vielle essayez de vous reconnectez.");
+                $result[$code] = "Votre session est probablement trop vielle essayez de vous reconnectez.";
                 break;
             case 429:
-                array_push($result, "Vous avez trop solicité l'API discord veuillez resssayer plus tard");
-                break;
-            case 304:
-                array_push($result, "Rien n'a été modifié, c'est problablement déjà bon");
+                $result[$code] = "Vous avez trop solicitez l'API discord veuillez resssayez plus tard.";
                 break;
             default:
-                array_push($result, "Erreur interne réessayez plus tard ou contactez un administrateur");
+                $result[$code] = "Erreur interne réessayez plus tard ou contactez un administrateur";
         }
         return $result;
     }
