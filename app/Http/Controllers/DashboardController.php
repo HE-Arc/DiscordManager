@@ -13,7 +13,33 @@ use function PHPUnit\Framework\isEmpty;
 
 class DashboardController extends Controller
 {
-    public function index($id)
+    public function index()
+    {
+        $apiclient = app(ApiClient::class);
+        $discord = new Discord($apiclient);
+        $guilds = $discord->guilds();
+
+        $InGuildList = array();
+        $NotInGuildList = array();
+        $botGuilds = app(DiscordClient::class)->user->getCurrentUserGuilds();
+
+        foreach ($guilds as $guild) {
+            foreach ($botGuilds as $guildBot) {
+                if ($guild->id == $guildBot->id)
+                {
+                    array_push($InGuildList,$guild);
+                    continue;
+                }
+            }
+            array_push($NotInGuildList,$guild);
+            continue;
+
+        }
+
+        return view('dashboard.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
+    }
+
+    public function server($id)
     {
         //TODO variable app(discord)
         $guild = app(DiscordClient::class)->guild->getGuild(['guild.id' => intval($id)]);

@@ -30,7 +30,8 @@ Route::group([
     Route::get("/home", [HomeController::class, 'index'])->name("home");
     Route::get('/add-bot/{id}',[LoginController::class, 'addBot'])->name("add-bot");
     Route::get('/discord/bot-added', [LoginController::class, 'handleBotCallback']);
-    Route::get('/dashboard/{id}', [DashboardController::class, 'index'])->name("dashboard");
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name("dashboard");
+    Route::get('/dashboard/{id}', [DashboardController::class, 'server'])->name("dashboard");
     Route::get('/logout', [LoginController::class, 'logout'])->name("logout");
     Route::post('/dashboard/{id}', [DashboardController::class, 'update'])->name("dashboard");
     Route::view("/register","welcome")->name("register");
