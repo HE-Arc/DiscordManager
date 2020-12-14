@@ -1,17 +1,60 @@
 body{
-    background-color:#11272A;
+    background-color:#2C2F33;
     height: 100%;
 }
-html{
-    height: 94%;
+.footer{
+    background-color: #23272A;
+    color: #e2e8f0;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
 }
+
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+.large-list{
+    max-width: 40%;
+}
+.dark-mode{
+    background-color:#23272A;
+    border-radius: 20px;
+    border-color: #23272A;
+    color: #e2e8f0;
+    margin-bottom: 30px;
+}
+.dark-mode:focus {
+    background-color:#23272A;
+}
+
+#add_server_list{
+    max-height: 200px;
+}
+.list-group-item{
+    color: #e2e8f0;
+    background-color:#23272A;
+    border-color:#23272A ;
+}
+.light-writing{
+    color: #e2e8f0;
+}
+.list-title{
+    color: #e2e8f0;
+}
+
 .list-group{
-    max-height: 500px;
+ padding: 10px;
+    height: 500px;
     max-width: 400px;
     margin-bottom: 10px;
     overflow:scroll;
-
+    overflow-x: hidden;
     background-color:#23272A;
+
 }
 .rounded-circle{
     height: 50px;
@@ -22,16 +65,17 @@ canvas{
     top:0;
     z-index:-1;
 }
+
 .sidebar {
     margin: 0;
     padding: 0;
-    width: 200px;
-    background-color: #f1f1f1;
+    width: 300px;
+    background-color: #23272A;
     height: 100%;
     overflow: auto;
 }
 .navbar{
-    background-color: #777777;
+    background-color: #23272A;
 
 }
 #dashboard{
@@ -42,17 +86,9 @@ canvas{
     color: black;
     padding: 16px;
     text-decoration: none;
+    background-color: #23272A;
 }
 
-.sidebar a.active {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.sidebar a:hover:not(.active) {
-    background-color: #555;
-    color: white;
-}
 
 div.content {
     margin-left: 200px;
@@ -60,9 +96,27 @@ div.content {
     height: 1000px;
 }
 
-
-#insidedb
-{
+#insidedb {
     margin-top: 2%;
 
 }
+
+::-webkit-scrollbar {
+
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: #202225;
+    border-radius: 8px;
+}
+.big-list{
+    font-size: xx-large;
+    background-color:#2C2F33;
+}
+
+

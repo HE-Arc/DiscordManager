@@ -7,13 +7,13 @@
         <div class="container-fluid ">
             <div class="row">
                 <div class="col">
-                    <div class="jumbotron " style="border-radius: 0px ;" >
+                    <div class="jumbotron "  >
                         <h1 class="display-4">Hello !</h1>
                         <p class="lead">Bienvenue sur Discord Manager. Le meilleur gestionnaire de serveur Discord pour les administrateurs</p>
                         <hr class="my-4">
                         <p></p>
                         <div class="d-flex  ">
-                            <a class="btn btn-primary btn-lg  " href="{{route("login")}}" role="button">go</a>
+                            <a class="btn btn-primary btn-lg  " href="{{route("login")}}" role="button">GO</a>
                         </div>
                     </div>
                 </div>
