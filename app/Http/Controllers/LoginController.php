@@ -28,23 +28,10 @@ class LoginController extends Controller
 
     public function loginCallback(Request $request)
     {
-//        dd(Socialite::driver('discord')->stateless()->user());
         try {
             if ($request->has('code'))
             {
                 $userSocial = Socialite::driver('discord')->stateless()->user();
-//                dd($userSocial);
-//                $user = User::firstOrCreate([
-//                    'email' => $userSocial->email
-//                ],
-//                    [
-//                        'discord_id' => $userSocial->id,
-//                        'name' => $userSocial->name,
-//                        'image' => $userSocial->avatar,
-//                        'token' => $userSocial->token,
-//                        'refresh_token' => $userSocial->refreshToken,
-//                    ]);
-
                 $user = User::firstOrNew([
                     'discord_id' => $userSocial->id
                 ]);
@@ -71,24 +58,6 @@ class LoginController extends Controller
     {
         Auth::logout();
         return redirect()->route("welcome");
-    }
-
-    /**
-     * Obtain the user information from GitHub.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function handleProviderCallback()
-    {
-        $apiclient = app(Discord\ApiClient::class);
-        $discord = new Discord($apiclient);
-        $guilds = $discord->guilds();
-
-        foreach ($guilds as $guild) {
-            if ($guild->id == 495147403683299330){
-                $guild->sendUserToDiscordToAddBot(Discord\Permissions\Permission::ADMINISTRATOR, $guild->id);
-            }
-        }
     }
 
     public function addBot($id)
