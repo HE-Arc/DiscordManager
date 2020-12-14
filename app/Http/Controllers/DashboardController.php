@@ -13,7 +13,34 @@ use function PHPUnit\Framework\isEmpty;
 
 class DashboardController extends Controller
 {
-    public function index($id)
+    //Affiche la page listant les serveurs (anciennement home)
+    public function servers()
+    {
+        $apiclient = app(ApiClient::class);
+        $discord = new Discord($apiclient);
+        $guilds = $discord->guilds();
+
+        $InGuildList = array();
+        $NotInGuildList = array();
+        $botGuilds = app(DiscordClient::class)->user->getCurrentUserGuilds();
+
+        foreach ($guilds as $guild) {
+            foreach ($botGuilds as $guildBot) {
+                if ($guild->id == $guildBot->id)
+                {
+                    array_push($InGuildList,$guild);
+                    continue;
+                }
+            }
+            array_push($NotInGuildList,$guild);
+            continue;
+
+        }
+
+        return view('dashboard.servers.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
+    }
+
+    public function server($id)
     {
         //TODO variable app(discord)
         $guild = app(DiscordClient::class)->guild->getGuild(['guild.id' => intval($id)]);
@@ -68,6 +95,13 @@ class DashboardController extends Controller
             $request->id,
             $request->input('usersId'));
         if(!isEmpty($result)) dd($result);
+    }
+
+    public function apiTest(){
+//        $results = DiscordUtils::removeGuildMembers(495147403683299330, [300392847180562432]);
+        $botId = app(DiscordClient::class)->user->getCurrentUser()->id;
+        $botMember = DiscordUtils::listAddableRoles(495147403683299330);
+        dd($botMember);
     }
 
 }

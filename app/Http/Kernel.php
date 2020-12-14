@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'refresh' => \App\Http\Middleware\CheckIfDiscordTokenValid::class,
+        'redirectIfAuth' => \App\Http\Middleware\RedirectIfAuthenticated::class,
 //        'sessionHasDiscordToken' => \LaravelRestcord\Http\Middleware\InstantiateApiClientWithTokenFromSession::class,
     ];
 }

@@ -57,7 +57,7 @@ class LoginController extends Controller
                 $user->save();
 
                 Auth::login($user,true);
-                return redirect()->route("home")->with(['status'=> 'alert-success','status_msg'=> 'Connexion réussie !']);
+                return redirect()->route("dashboard")->with(['status'=> 'alert-success','status_msg'=> 'Connexion réussie !']);
             }
             throw new \Exception($request->get("error_description"));
         }
@@ -70,7 +70,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route("home");
+        return redirect()->route("welcome");
     }
 
     /**
