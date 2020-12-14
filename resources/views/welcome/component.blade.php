@@ -1,6 +1,6 @@
 @extends('layout.componant')
 @section('openbody')
-    <body onload="initWebGL();" width="100%">
+    <body onload="initWebGL();" width="100%"   >
 @endsection
 
 @section('script_include')
@@ -114,4 +114,16 @@ function initWebGL() {
 
 @section('banner')
     <canvas id="canvas-exercice" style="border: none;" width="4000" height="1390" ></canvas>
+@endsection
+
+@section('footer')
+    <!-- Footer -->
+    <footer class="page-footer ">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3 footer">
+            <a>footer</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
 @endsection

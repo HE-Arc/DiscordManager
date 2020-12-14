@@ -29,10 +29,10 @@
 @endsection
 
 @section('sidebar')
-    <div class="sidebar">
+    <div class="sidebar light-writing">
 
         <a>@yield('guildtitle')</a>
-        <a  href="#home">Members</a>
+        <a class="light-writing"  >Members</a>
 
 
     </div>
