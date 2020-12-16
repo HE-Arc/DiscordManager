@@ -1,8 +1,9 @@
-body{
-    background-color:#2C2F33;
+body {
+    background-color: #2C2F33;
     height: 100%;
 }
-.footer{
+
+.footer {
     background-color: #23272A;
     color: #e2e8f0;
     position: fixed;
@@ -12,59 +13,80 @@ body{
 
 }
 
+.dropdown-menu {
+    background-color: #202225;
+}
+
+.dropdown-item {
+    color: #e2e8f0;
+}
+
+.dropdown-item:hover{
+    color: #e2e8f0;
+    background-color:#23272A ;
+}
+
 html, body {
     margin: 0;
     height: 100%;
     overflow: hidden;
 }
-.large-list{
+
+.large-list {
     max-width: 40%;
 }
-.dark-mode{
-    background-color:#23272A;
+
+.dark-mode {
+    background-color: #23272A;
     border-radius: 20px;
     border-color: #23272A;
     color: #e2e8f0;
     margin-bottom: 30px;
 }
+
 .dark-mode:focus {
-    background-color:#23272A;
+    background-color: #23272A;
     color: #e2e8f0;
 }
 
-#add_server_list{
+#add_server_list {
     max-height: 200px;
 }
-.list-group-item{
+
+.list-group-item {
     color: #e2e8f0;
-    background-color:#23272A;
-    border-color:#23272A ;
+    background-color: #23272A;
+    border-color: #23272A;
 }
-.light-writing{
-    color: #e2e8f0;
-}
-.list-title{
+
+.light-writing {
     color: #e2e8f0;
 }
 
-.list-group{
- padding: 10px;
+.list-title {
+    color: #e2e8f0;
+}
+
+.list-group {
+    padding: 10px;
     height: 500px;
     max-width: 400px;
     margin-bottom: 10px;
-    overflow:scroll;
+    overflow: scroll;
     overflow-x: hidden;
-    background-color:#23272A;
+    background-color: #23272A;
 
 }
-.rounded-circle{
+
+.rounded-circle {
     height: 50px;
 }
-canvas{
-    position:absolute;
-    left:-700px;
-    top:0;
-    z-index:-1;
+
+canvas {
+    position: absolute;
+    left: -700px;
+    top: 0;
+    z-index: -1;
 }
 
 .sidebar {
@@ -75,13 +97,16 @@ canvas{
     height: 100%;
     overflow: auto;
 }
-.navbar{
+
+.navbar {
     background-color: #23272A;
 
 }
-#dashboard{
+
+#dashboard {
     height: 100%;
 }
+
 .sidebar a {
     display: block;
     color: black;
@@ -111,13 +136,15 @@ div.content {
 
     border-radius: 8px;
 }
+
 ::-webkit-scrollbar-thumb {
     background: #202225;
     border-radius: 8px;
 }
-.big-list{
+
+.big-list {
     font-size: xx-large;
-    background-color:#2C2F33;
+    background-color: #2C2F33;
 }
 
 

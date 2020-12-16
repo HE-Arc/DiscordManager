@@ -1,4 +1,4 @@
-@extends('layout.componant')
+@extends('layout.component')
 @section('openbody')
     <body onload="initWebGL();" width="100%"   >
 @endsection
