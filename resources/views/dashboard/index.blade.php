@@ -5,17 +5,18 @@
 
     @yield('nav2')
     <div class=" d-flex justify-content-around " id="dashboard">
-        <div class="col-8  " id="insidedb">
+        <div class="col-10" id="insidedb">
             <form method="POST" action="">
                 @csrf
                 <div class="row">
 
-                    <div class="col-sm">
+                    <div class="col-sm with-background">
                         <h1 class="list-title">Users</h1>
                         <div class="md-form mt-0 dark-mode">
                             <input id="searchMember" class="form-control dark-mode" type="text" placeholder="Search"
                                    aria-label="Search">
                         </div>
+                        <div class="light-writing"><input type="checkbox"> Select all</div>
                         <div id="membersList" class="list-group list-group-flush">
                             @foreach ($members as $member)
                                 <label class="list-group-item d-flex justify-content-start align-items-center">
@@ -43,7 +44,6 @@
                                 </label>
                             @endforeach
                         </div>
-                        <div class="light-writing"><input type="checkbox"> select all</div>
                     </div>
 
                     <script type="text/javascript">
@@ -69,6 +69,22 @@
                         <h1 class="list-title">Action</h1>
                         <ul class=" list-group big-list list-group-flush ">
 
+                            <div class="list-group" id="list-tab" role="tablist">
+                                <a class="list-group-item list-group-item-action active"
+                                   onclick="document.getElementById('role_list').style.visibility = 'visible';"
+                                   data-toggle="list" href="#"
+                                   role="tab" aria-controls="home">Add roles</a>
+                                <a class="list-group-item list-group-item-action"
+                                   onclick="document.getElementById('role_list').style.visibility = 'visible';"
+                                   data-toggle="list" href="#" role="tab"
+                                   aria-controls="profile">Remove roles</a>
+                                <a class="list-group-item list-group-item-action"
+                                   onclick="document.getElementById('role_list').style.visibility = 'hidden';"
+                                   data-toggle="list" href="#" role="tab"
+                                   aria-controls="messages">Kick user</a>
+                            </div>
+
+                            <!--
                             <li class="list-group-item big-list">
                                 <input class="form-check-input" type="radio" name="action" value="addRoles" checked
                                        onclick="document.getElementById('role_list').style.visibility = 'visible';">
@@ -83,15 +99,16 @@
                                 <input class="form-check-input" type="radio" name="action" value="kick"
                                        onclick="document.getElementById('role_list').style.visibility = 'hidden';">
                                 Kick user
-                            </li>
+                            </li>-->
 
                         </ul>
                     </div>
-                    <div class="col-sm" id="role_list">
+                    <div class="col-sm with-background" id="role_list">
                         <h1 class="list-title">Roles</h1>
                         <div class="md-form mt-0">
                             <input class="form-control dark-mode" type="text" placeholder="Search" aria-label="Search">
                         </div>
+                        <div class="light-writing"><input type="checkbox"> Select all</div>
                         <ul class="list-group list-group-flush">
                             @foreach ($roles as $role)
                                 <li class="list-group-item">
@@ -101,10 +118,11 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <div class="light-writing"><input type="checkbox"> select all</div>
                     </div>
                 </div>
-                <input class="btn btn-primary btn-lg" type="submit" value="OK">
+                <div class="apply-button-container">
+                    <input class="btn btn-primary btn-lg apply-button" type="submit" value="Apply changes">
+                </div>
             </form>
         </div>
     </div>
