@@ -38,6 +38,10 @@ html, body {
     color: #e2e8f0;
     background-color:#23272A;
     border-color:#23272A ;
+    width: 15rem;
+}
+.list-group .text-truncate{
+    width: 14rem;
 }
 .light-writing{
     color: #e2e8f0;
@@ -56,6 +60,7 @@ html, body {
     background-color:#23272A;
 
 }
+
 .rounded-circle{
     height: 50px;
 }

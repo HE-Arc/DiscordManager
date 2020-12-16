@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://kit.fontawesome.com/60010d6147.js" crossorigin="anonymous"></script>
     <link href="/css/style.css" rel="stylesheet">
+
+    <script src="/js/searchbar.js"></script>
     @yield('script_include')
     @yield('webgl_include')
     @yield('script')

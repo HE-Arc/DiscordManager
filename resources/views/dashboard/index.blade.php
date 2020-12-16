@@ -9,15 +9,17 @@
                 @csrf
                 <div class="row">
 
-                    <div class="col-sm">
+                    <div class="col-sm advancedGroupList">
                         <h1 class="list-title">Users</h1>
                         <div class="md-form mt-0 dark-mode">
-                            <input id="searchMember" class="form-control dark-mode" type="text" placeholder="Search" aria-label="Search">
+                            <input id="searchMember" class="form-control dark-mode searchbar" type="text" placeholder="Search"
+                                   aria-label="Search">
                         </div>
-                        <div id="membersList"  class="list-group list-group-flush">
+                        <div id="listMembers" class="list-group list-group-flush">
                             @foreach ($members as $member)
                                 <label class="list-group-item d-flex justify-content-start align-items-center">
-                                    <input class="form-check-input" type="checkbox" name="usersId[]" value="{{$member->user->id}}">
+                                    <input class="form-check-input" type="checkbox" name="usersId[]"
+                                           value="{{$member->user->id}}">
                                     <img
                                         @if($member->user->avatar != null)
                                         src="https://cdn.discordapp.com/avatars/{{$member->user->id}}/{{$member->user->avatar}}.png?size=128"
@@ -27,36 +29,29 @@
                                         alt="Image de guilde"
                                         class="rounded-circle mx-2">
                                     <div id="memberName" class="mx-2">
-                                        <div class="font-weight-bold">{{$member ->user->username}}#{{$member ->user->discriminator}}
+                                        <div class="text-nowrap text-truncate font-weight-bold">
+                                            {{$member ->user->username}}#{{$member ->user->discriminator}}
                                             @if($member->user->bot == true)
-                                                <span class="badge badge-primary" >BOT</span>
+                                                <span class="badge badge-primary">BOT</span>
                                             @endif
                                         </div>
                                         @if($member->nick != null)
-                                            <small class="font-italic">{{$member->nick}}</small>
+                                            <small class="text-nowrap text-truncate font-italic">{{$member->nick}}</small>
                                         @endif
                                     </div>
                                 </label>
                             @endforeach
                         </div>
-                        <div class="light-writing"><input type="checkbox"> select all</div>
+                        <div class="light-writing"><input id="selectAllMembers" class="selectAll" type="checkbox"> select all</div>
                     </div>
 
                     <script type="text/javascript">
-                          $(document).ready(function(){
-                            $("#searchMember").on("keyup", function() {
-
-                                var value = $(this).val().toLowerCase();
-                                $("#membersList label").filter(function() {
-                                    if ($(this).text().toLowerCase().indexOf(value) > -1)
-                                    {
-                                        $(this).show();
-                                        $(this).children().show();
-                                    }
-                                    else {
-                                        $(this).hide();
-                                        $(this).children().hide();
-                                    }
+                        $(document).ready(function () {
+                            $('#selectAllMembers').change(function () {
+                                checkboxSelectAll = this;
+                                $("#listMembers label:visible .form-check-input").filter(function () {
+                                    if (checkboxSelectAll.checked) {$(this).prop('checked', true);}
+                                    else {$(this).prop('checked', false);}
                                 });
                             });
                         });
@@ -85,21 +80,39 @@
 
                         </ul>
                     </div>
-                    <div class="col-sm" id="role_list">
+
+                    <div class="col-sm advancedGroupList" id="role_list">
                         <h1 class="list-title">Roles</h1>
                         <div class="md-form mt-0">
-                            <input class="form-control dark-mode" type="text" placeholder="Search" aria-label="Search">
+                            <input id="searchRole" class="form-control dark-mode searchbar" type="text" placeholder="Search" aria-label="Search">
                         </div>
-                        <ul class="list-group list-group-flush">
+                        <div id="listRoles" class="list-group list-group-flush">
                             @foreach ($roles as $role)
-                                <li class="list-group-item">
-                                    <input class="form-check-input" type="checkbox" name="rolesId[]" value="{{$role ->id}}">
-                                    {{$role ->name}}
-                                </li>
+                                <label class="list-group-item d-flex justify-content-start align-items-center">
+                                    <input class="form-check-input" type="checkbox" name="rolesId[]"
+                                           value="{{$role ->id}}">
+                                    <div class="text-nowrap text-truncate font-weight-bold mx-2 " style="color: #{{dechex($role->color)}}">
+                                        {{$role->name}}
+                                    </div>
+                                </label>
+
                             @endforeach
-                        </ul>
-                        <div class="light-writing"><input type="checkbox"> select all</div>
+                        </div>
+                        <div class="light-writing"><input id="selectAllRoles"  class="selectAll" type="checkbox"> select all</div>
                     </div>
+
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#selectAllRoles').change(function () {
+                                checkboxSelectAll = this;
+                                $("#listRoles label:visible .form-check-input").filter(function () {
+                                    if (checkboxSelectAll.checked) {$(this).prop('checked', true);}
+                                    else {$(this).prop('checked', false);}
+                                });
+                            });
+                        });
+                    </script>
+
                 </div>
                 <input class="btn btn-primary btn-lg" type="submit" value="OK">
             </form>
