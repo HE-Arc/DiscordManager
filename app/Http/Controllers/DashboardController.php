@@ -36,13 +36,12 @@ class DashboardController extends Controller
 
     public function server($id)
     {
-        //TODO variable app(discord)
-        $guild = app(DiscordClient::class)->guild->getGuild(['guild.id' => intval($id)]);
-        $members = app(DiscordClient::class)->guild->listGuildMembers(['guild.id' => intval($id), 'limit' => 1000]);
+        $discordClientGuild = app(DiscordClient::class)->guild;
+        $guild = $discordClientGuild->getGuild(['guild.id' => intval($id)]);
+        $members = $discordClientGuild->listGuildMembers(['guild.id' => intval($id), 'limit' => 1000]);
         $roles = DiscordUtils::listWorkableRoles(intval($id));
 
         return view('dashboard.index', ["guild" => $guild, "members" => $members, "roles" => $roles]);
-        //return view('dashboard.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
     }
 
     public function update(Request $request)
@@ -88,13 +87,6 @@ class DashboardController extends Controller
             $request->id,
             $request->input('usersId'));
         if(!isEmpty($result)) dd($result);
-    }
-
-    public function apiTest(){
-//        $results = DiscordUtils::removeGuildMembers(495147403683299330, [300392847180562432]);
-        $botId = app(DiscordClient::class)->user->getCurrentUser()->id;
-        $botMember = DiscordUtils::listAddableRoles(495147403683299330);
-        dd($botMember);
     }
 
 }
