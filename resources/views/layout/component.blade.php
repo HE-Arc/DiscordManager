@@ -12,7 +12,7 @@
             @if (\Illuminate\Support\Facades\Auth::check())
                 @if (Route::has('dashboard'))
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{route("dashboard")}}">Dashboard <i class="fas fa-home"></i></a>
+                        <a class="nav-link" href="{{route("dashboard")}}">Servers <i class="fas fa-home"></i></a>
                     </li>
                 @endif
                 <li class="nav-item dropdown">
