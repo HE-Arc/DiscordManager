@@ -46,6 +46,7 @@ class DiscordUtils
         foreach ($usersId as $userId) {
             foreach ($rolesId as $roleId) {
                 try {
+//                    new DiscordClient()->
                     app(DiscordClient::class)->guild->addGuildMemberRole(['guild.id' => intval($guildId), 'user.id' => intval($userId), 'role.id' => intval($roleId)]);
                 } catch (CommandClientException $exception) {
                     $results[$userId] = self::handleDiscordException($exception);
@@ -128,7 +129,7 @@ class DiscordUtils
         $botRoles = app(DiscordClient::class)->guild->getGuildMember(['guild.id' => $guildId, 'user.id' => $botId])->roles;
         $roles = collect(app(DiscordClient::class)->guild->getGuildRoles(['guild.id' => $guildId]));
         $maxBotRolesPosition = $roles->whereIn('id', $botRoles)->max('position');
-        $filteredRoles = $roles->where('managed', false)->whereBetween('position', [0, $maxBotRolesPosition]);
+        $filteredRoles = $roles->where('managed', false)->whereBetween('position', [0, $maxBotRolesPosition-1]);
         return $filteredRoles->skip(1)->all(); //everyone is ALWAYS the first of the list
     }
 
