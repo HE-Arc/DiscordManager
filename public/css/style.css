@@ -66,6 +66,8 @@ html, body {
     background-color: transparent;
     border: none;
     width: 15rem;
+}
+
 .list-group-flush .list-group-item {
     border-radius: 10px;
 }

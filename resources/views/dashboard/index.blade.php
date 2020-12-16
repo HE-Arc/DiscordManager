@@ -16,7 +16,7 @@
                             <input id="searchMember" class="form-control dark-mode searchbar" type="text" placeholder="Search"
                                    aria-label="Search">
                         </div>
-                        <div class="light-writing"><input class="selectAll" type="checkbox"> Select all</div>
+                        <div class="light-writing"><input id="selectAllMembers" class="selectAll" type="checkbox"> Select all</div>
                         <div id="listMembers" class="list-group list-group-flush">
                             @foreach ($members as $member)
                                 <label class="list-group-item d-flex justify-content-start align-items-center">
@@ -77,24 +77,6 @@
                                    data-toggle="list" href="#" role="tab"
                                    aria-controls="messages">Kick user</a>
                             </div>
-
-                            <!--
-                            <li class="list-group-item big-list">
-                                <input class="form-check-input" type="radio" name="action" value="addRoles" checked
-                                       onclick="document.getElementById('role_list').style.visibility = 'visible';">
-                                Add roles
-                            </li>
-                            <li class="list-group-item big-list">
-                                <input class="form-check-input" type="radio" name="action" value="removeRoles"
-                                       onclick="document.getElementById('role_list').style.visibility = 'visible';">
-                                Remove roles
-                            </li>
-                            <li class="list-group-item big-list">
-                                <input class="form-check-input" type="radio" name="action" value="kick"
-                                       onclick="document.getElementById('role_list').style.visibility = 'hidden';">
-                                Kick user
-                            </li>-->
-
                         </ul>
                     </div>
 
@@ -103,7 +85,7 @@
                         <div class="md-form mt-0">
                             <input id="searchRole" class="form-control dark-mode searchbar" type="text" placeholder="Search" aria-label="Search">
                         </div>
-                        <div class="light-writing"><input class="selectAll" type="checkbox"> Select all</div>
+                        <div class="light-writing"><input id="selectAllRoles" class="selectAll" type="checkbox"> Select all</div>
                         <div id="listRoles" class="list-group list-group-flush">
                             @foreach ($roles as $role)
                                 <label class="list-group-item d-flex justify-content-start align-items-center">
