@@ -30,6 +30,8 @@ Route::group([
     Route::prefix('dashboard')->group(function () {
         Route::get("/", [DashboardController::class, 'servers'])->name("dashboard");
 
+        Route::get('/about-server/{id}', [DashboardController::class, 'aboutServer'])->name("dashboard.server");
+
         Route::get('/{id}', [DashboardController::class, 'server'])->name("dashboard.server");
         Route::post('/{id}', [DashboardController::class, 'update'])->name("dashboard.server");
     });

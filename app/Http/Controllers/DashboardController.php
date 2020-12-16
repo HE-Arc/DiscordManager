@@ -26,18 +26,17 @@ class DashboardController extends Controller
 
         foreach ($guilds as $guild) {
             foreach ($botGuilds as $guildBot) {
-                if ($guild->id == $guildBot->id)
-                {
-                    array_push($InGuildList,$guild);
+                if ($guild->id == $guildBot->id) {
+                    array_push($InGuildList, $guild);
                     continue;
                 }
             }
-            array_push($NotInGuildList,$guild);
+            array_push($NotInGuildList, $guild);
             continue;
 
         }
 
-        return view('dashboard.servers.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
+        return view('dashboard.servers.index', ["InGuildList" => $InGuildList, "NotInGuildList" => $NotInGuildList]);
     }
 
     public function server($id)
@@ -51,15 +50,21 @@ class DashboardController extends Controller
         //return view('dashboard.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
     }
 
+    public function aboutServer($id)
+    {
+        $guild = app(DiscordClient::class)->guild->getGuild(['guild.id' => intval($id)]);
+        return view('dashboard.server-info', ["guild" => $guild, "members" => [], "roles" => [], "pageName" => "Server info"]);
+    }
+
     public function update(Request $request)
     {
-        if($request->has('action')){
+        if ($request->has('action')) {
             switch ($request->get('action')) {
                 case "addRoles":
-                    if($request->has(['rolesId', 'usersId'])) $this->addRoles($request);
+                    if ($request->has(['rolesId', 'usersId'])) $this->addRoles($request);
                     break;
                 case "removeRoles":
-                    if($request->has(['rolesId', 'usersId'])) $this->removeRoles($request);
+                    if ($request->has(['rolesId', 'usersId'])) $this->removeRoles($request);
                     break;
                 case "kick":
                     $this->kick($request);
@@ -76,7 +81,7 @@ class DashboardController extends Controller
             $request->get('id'),
             $request->input('usersId'),
             $request->input('rolesId'));
-        if(isEmpty($result)) dd($result);
+        if (isEmpty($result)) dd($result);
     }
 
     private function removeRoles(Request $request)
@@ -85,7 +90,7 @@ class DashboardController extends Controller
             $request->get('id'),
             $request->input('usersId'),
             $request->input('rolesId'));
-        if(isEmpty($result)) dd($result);
+        if (isEmpty($result)) dd($result);
     }
 
     private function kick(Request $request)
@@ -93,10 +98,11 @@ class DashboardController extends Controller
         $result = DiscordUtils::removeGuildMembers(
             $request->id,
             $request->input('usersId'));
-        if(!isEmpty($result)) dd($result);
+        if (!isEmpty($result)) dd($result);
     }
 
-    public function apiTest(){
+    public function apiTest()
+    {
 //        $results = DiscordUtils::removeGuildMembers(495147403683299330, [300392847180562432]);
         $botId = app(DiscordClient::class)->user->getCurrentUser()->id;
         $botMember = DiscordUtils::listAddableRoles(495147403683299330);
