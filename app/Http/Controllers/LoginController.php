@@ -75,13 +75,13 @@ class LoginController extends Controller
 
     public function handleBotCallback(){
         if (isset($_GET['error'])){
-            app(Discord\Bots\HandlesBotAddedToGuild::class)->botNotAdded($_GET['error']);
+            return app(Discord\Bots\HandlesBotAddedToGuild::class)->botNotAdded($_GET['error']);
         }else{
             $apiclient = app(Discord\ApiClient::class);
             $discord = new Discord($apiclient);
             foreach ($discord->guilds() as $guild){
                 if ($guild->id == intval($_GET['guild_id'])){
-                    app(Discord\Bots\HandlesBotAddedToGuild::class)->botAdded($guild);
+                    return app(Discord\Bots\HandlesBotAddedToGuild::class)->botAdded($guild);
                 }
             }
         }

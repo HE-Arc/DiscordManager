@@ -39,3 +39,28 @@
 </header>
 @endsection
 
+@section('footer')
+    <!-- Footer -->
+    <footer class="page-footer fixed-bottom ">
+        <!-- Copyright -->
+{{--        <div class="footer-copyright text-center py-3 footer">--}}
+{{--            <a href="">2020 <b>Discord Manager</b></a>--}}
+{{--        </div>--}}
+        <!-- Copyright -->
+
+        @if(Session::has('status'))
+        <div class="alert {{Session::get('status')}} alert-dismissible w-75 mx-auto fade show" role="alert">
+            {{Session::get('status_msg')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+            <script type="text/javascript">
+                $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+                    $(".alert").slideUp(500);
+                });
+            </script>
+        @endif
+    </footer>
+
+@endsection

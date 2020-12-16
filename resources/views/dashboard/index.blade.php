@@ -3,10 +3,6 @@
 @section('content')
     @include('dashboard.component')
     <div class="row " id="dashboard">
-        <div class="col-2">
-
-            @yield('sidebar')
-        </div>
 
         <div class="col-8 " id="insidedb">
             <form method="POST" action="">
@@ -16,22 +12,57 @@
                     <div class="col-sm">
                         <h1 class="list-title">Users</h1>
                         <div class="md-form mt-0 dark-mode">
-                            <input class="form-control dark-mode" type="text" placeholder="Search" aria-label="Search">
+                            <input id="searchMember" class="form-control dark-mode" type="text" placeholder="Search" aria-label="Search">
                         </div>
-                        <ul class="list-group list-group-flush">
+                        <div id="membersList"  class="list-group list-group-flush">
                             @foreach ($members as $member)
-                                <li class="list-group-item">
-                                    <input class="form-check-input" type="checkbox" name="usersId[]" value="{{$member ->user->id}}">
-                                    {{$member ->user->username}}
-                                    @if($member->nick != null)
-                                        ({{$member->nick}})
-                                    @endif
-                                </li>
+                                <label class="list-group-item d-flex justify-content-start align-items-center">
+                                    <input class="form-check-input" type="checkbox" name="usersId[]" value="{{$member->user->id}}">
+                                    <img
+                                        @if($member->user->avatar != null)
+                                        src="https://cdn.discordapp.com/avatars/{{$member->user->id}}/{{$member->user->avatar}}.png?size=128"
+                                        @else
+                                        src="https://cdn.discordapp.com/app-icons/761513537825669130/6436659f90801b9ac8b9a5e7dac56bfb.png"
+                                        @endif
+                                        alt="Image de guilde"
+                                        class="rounded-circle mx-2">
+                                    <div id="memberName" class="mx-2">
+                                        <div class="font-weight-bold">{{$member ->user->username}}#{{$member ->user->discriminator}}
+                                            @if($member->user->bot == true)
+                                                <span class="badge badge-primary" >BOT</span>
+                                            @endif
+                                        </div>
+                                        @if($member->nick != null)
+                                            <small class="font-italic">{{$member->nick}}</small>
+                                        @endif
+                                    </div>
+                                </label>
                             @endforeach
-                        </ul>
+                        </div>
                         <div class="light-writing"><input type="checkbox"> select all</div>
-
                     </div>
+
+                    <script type="text/javascript">
+                          $(document).ready(function(){
+                            $("#searchMember").on("keyup", function() {
+
+                                var value = $(this).val().toLowerCase();
+                                $("#membersList label").filter(function() {
+                                    if ($(this).text().toLowerCase().indexOf(value) > -1)
+                                    {
+                                        $(this).show();
+                                        $(this).children().show();
+                                    }
+                                    else {
+                                        $(this).hide();
+                                        $(this).children().hide();
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+
+
                     <div class="col-sm">
                         <h1 class="list-title">Action</h1>
                         <ul class=" list-group big-list list-group-flush ">
