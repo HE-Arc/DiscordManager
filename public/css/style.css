@@ -29,6 +29,7 @@ html, body {
 }
 .dark-mode:focus {
     background-color:#23272A;
+    color: #e2e8f0;
 }
 
 #add_server_list{
