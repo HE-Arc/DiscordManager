@@ -122,13 +122,14 @@ class DiscordUtils
         }
     }
 
-    public static function listWorkableRoles($guildId){
+    public static function listWorkableRoles($guildId)
+    {
         $botId = app(DiscordClient::class)->user->getCurrentUser()->id;
         $botRoles = app(DiscordClient::class)->guild->getGuildMember(['guild.id' => $guildId, 'user.id' => $botId])->roles;
         $roles = collect(app(DiscordClient::class)->guild->getGuildRoles(['guild.id' => $guildId]));
         $maxBotRolesPosition = $roles->whereIn('id', $botRoles)->max('position');
         $filteredRoles = $roles->where('managed', false)->whereBetween('position', [0, $maxBotRolesPosition]);
-        return $filteredRoles->all();
+        return $filteredRoles->skip(1)->all(); //everyone is ALWAYS the first of the list
     }
 
     public static function handleDiscordException(CommandClientException $exception)
@@ -136,7 +137,7 @@ class DiscordUtils
         dd($exception);
         $code = $exception->getResponse()->getStatusCode();
 
-        $result = [$code=>""];
+        $result = [$code => ""];
         switch ($code) {
             case 403:
                 $result[$code] = "Vous n'avez pas les permissions de faire cela !";
