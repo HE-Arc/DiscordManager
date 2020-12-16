@@ -120,4 +120,12 @@ div.content {
     background-color:#2C2F33;
 }
 
+.btn-primary{
+    background-color: #7289da;
+}
+
+.jumbotron{
+    background-color: #23272a;
+    color: #ffffff;
+}
 
