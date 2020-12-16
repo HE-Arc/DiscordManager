@@ -1,12 +1,12 @@
 @extends('layout.app')
 @section('content')
-    @include('layout.componant')
+    @include('layout.component')
     <!-- home -->
     <main role="main" class="container mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-sm advancedGroupList">
-                    <h1>Manage server</h1>
+                    <h1 class="light-writing">Manage server</h1>
                     <div class="md-form mt-0">
                         <input class="form-control dark-mode searchbar" type="text" placeholder="Search"
                                aria-label="Search">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="col-sm advancedGroupList">
-                    <h1>Add server</h1>
+                    <h1 class="light-writing" >Add server</h1>
                     <div class="md-form mt-0">
                         <input class="form-control dark-mode searchbar" type="text" placeholder="Search"
                                aria-label="Search">
