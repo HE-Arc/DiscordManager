@@ -84,8 +84,9 @@ html, body {
 
 canvas {
     position: absolute;
-    left: -700px;
-    top: 0;
+    left: -40px;
+    top: 0px;
+
     z-index: -1;
 }
 

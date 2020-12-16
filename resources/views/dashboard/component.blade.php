@@ -38,12 +38,11 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown link
+                        {{ $pageName }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="#">Members</a></li>
+                        <li><a class="dropdown-item" href="#">Server info</a></li>
                     </ul>
                 </li>
             </ul>

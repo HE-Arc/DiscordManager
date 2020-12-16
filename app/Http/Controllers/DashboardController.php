@@ -47,7 +47,7 @@ class DashboardController extends Controller
         $members = app(DiscordClient::class)->guild->listGuildMembers(['guild.id' => intval($id), 'limit' => 1000]);
         $roles = app(DiscordClient::class)->guild->getGuildRoles(['guild.id' => intval($id)]);
 
-        return view('dashboard.index', ["guild" => $guild, "members" => $members, "roles" => $roles]);
+        return view('dashboard.index', ["guild" => $guild, "members" => $members, "roles" => $roles, "pageName" => "Members"]);
         //return view('dashboard.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
     }
 
