@@ -28,15 +28,6 @@
         class="rounded-circle " >
 @endsection
 
-@section('sidebar')
-    <div class="sidebar light-writing">
-
-        <a>@yield('guildtitle')</a>
-        <a class="light-writing"  >Members</a>
-
-
-    </div>
-@endsection
 @section('openbody')
     <body >
 @endsection

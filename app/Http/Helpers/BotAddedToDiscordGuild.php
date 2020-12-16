@@ -15,13 +15,12 @@ class BotAddedToDiscordGuild
 
     public function botAdded(Guild $guild) : RedirectResponse
     {
-        return redirect('/yo');
+        return redirect("/dashboard/".$guild->id)->with(['status'=> 'alert-success','status_msg'=> 'Bot Ajouté!']);
     }
 
     public function botNotAdded(string $error): RedirectResponse
     {
-        // TODO: Implement botNotAdded() method.
-        echo "<script>alert('yoyo')</script>";
+        return redirect()->back()->with(['status'=> 'alert-danger','status_msg'=> $error]);
     }
 }
 
