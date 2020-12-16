@@ -29,13 +29,13 @@ function handleMouseUp(event) {
 function rotateModelViewMatrixUsingQuaternion() {
 	angle = degToRad(rotY);
 	rotYQuat = quat4.create([0, Math.sin(angle/2.0), 0, Math.cos(angle/2.0)]);
-	
+
 	angle = degToRad(rotX);
 	rotXQuat = quat4.create([Math.sin(angle/2.0), 0, 0, Math.cos(angle/2.0)]);
-	
+
 	myQuaternion = quat4.multiply(rotYQuat, rotXQuat);
 	mvMatrix = mat4.multiply(quat4.toMat4(myQuaternion), mvMatrix);
-	
+
 	rotX = 0;
 	rotY = 0;
 }

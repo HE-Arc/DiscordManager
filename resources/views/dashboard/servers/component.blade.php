@@ -1,4 +1,4 @@
-@extends('layout.componant')
+@extends('layout.component')
 
 @section('sidebar_home')
     <div class="sidebar light-writing">

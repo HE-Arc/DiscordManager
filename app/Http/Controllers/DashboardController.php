@@ -41,7 +41,7 @@ class DashboardController extends Controller
         $members = $discordClientGuild->listGuildMembers(['guild.id' => intval($id), 'limit' => 1000]);
         $roles = DiscordUtils::listWorkableRoles(intval($id));
 
-        return view('dashboard.index', ["guild" => $guild, "members" => $members, "roles" => $roles]);
+        return view('dashboard.index', ["guild" => $guild, "members" => $members, "roles" => $roles, "pageName" => "Members"]);
     }
 
     public function update(Request $request)

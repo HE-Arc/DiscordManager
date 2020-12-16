@@ -1,4 +1,4 @@
-@extends('layout.componant')
+@extends('layout.component')
 @section('openbody')
     <body onload="initWebGL();" width="100%"   >
 @endsection
@@ -53,14 +53,11 @@
 
 <script type="text/javascript">
 
-
 var vertexBuffer;
 var colorBuffer;
 var indexBuffer;
 var textureCoordBuffer;
 var indices;
-
-
 
 var mvMatrix = mat4.create();
 var pMatrix = mat4.create();
@@ -68,7 +65,6 @@ var pMatrix = mat4.create();
 var xPos = 0.0;
 var yPos = 0.0;
 var zPos = 0.0;
-
 
 var gl;
 
@@ -95,16 +91,16 @@ function initWebGL() {
 
     if(hour > 23 || hour < 6){
         // charge la texture de nuit
-        texture0 = initTexture(gl, "/test2.png");
+        texture0 = initTexture(gl, "/owl.png");
     }else if (hour>22) {
         // charge la texture du soir
-        texture0 = initTexture(gl, "/test2.png");
+        texture0 = initTexture(gl, "/owl.png");
     }else if (hour<9) {
         // charge la texture du matin
-        texture0 = initTexture(gl, "/test2.png");
+        texture0 = initTexture(gl, "/owl.png");
     }else {
         // charge la texture de jour
-        texture0 = initTexture(gl, "/test2.png");
+        texture0 = initTexture(gl, "/owl.png");
     }
 
     tick();
@@ -113,7 +109,7 @@ function initWebGL() {
 @endsection
 
 @section('banner')
-    <canvas id="canvas-exercice" style="border: none;" width="4000" height="1390" ></canvas>
+    <canvas id="canvas-exercice" style="border: none;" width="2048" height="1536" ></canvas>
 @endsection
 
 

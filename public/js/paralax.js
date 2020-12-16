@@ -128,6 +128,7 @@ function drawScene() {
 
     mat4.identity(mvMatrix);
     mat4.rotate(mvMatrix, degToRad(rotY), [0, 1, 0]);
+    mat4.rotate(mvMatrix, degToRad(rotX), [1, 0, 0]);
 
     gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
 
@@ -140,18 +141,25 @@ function drawScene() {
 }
 
 var rotY = 0;
+var rotX = 0;
 var rotYdest = 0;
+var rotXdest = 0;
 var mousePos;
 var lastTime = 0;
 
 function animate() {
     // Rend les mouvements brusques de la souris plus fluides
-    var delta = rotYdest-rotY;
-    if(delta>0){
-        rotY+=Math.min(delta, 0.35);
+    var deltaY = rotYdest-rotY;
+
+    rotY += deltaY * 0.1;
+
+    var deltaX = rotXdest-rotX;
+
+    rotX += deltaX * 0.1;
+    if(deltaY>0){
     }
     else{
-        rotY+=Math.max(delta, -0.35);
+    //    rotY += Math.max(delta, -0.35);
     }
 }
 
@@ -166,8 +174,11 @@ function handleMouseMove(event) {
     event = event || window.event;
     mousePos = {x: event.clientX, y: event.clientY};
     dX = 1.0*mousePos.x/window.innerWidth*gl.viewportWidth - (gl.viewportWidth/2);
+    dY = 1.0*mousePos.y/window.innerWidth*gl.viewportWidth - (gl.viewportWidth/2);
 
     rotYdest = dX/100;
+    rotXdest = dY/200;
+
 }
 function initShaderParameters() {
     // Bridge between CPU and GPU
