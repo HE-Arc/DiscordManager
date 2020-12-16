@@ -29,11 +29,9 @@ class DiscordUtils
     public static function isBotInGuilds($guildsId)
     {
         $guilds = collect(app(DiscordClient::class)->user->getCurrentUserGuilds());
-        $inGuildList = $guilds->map(function ($guild) {
+        return $inGuildList = $guilds->map(function ($guild) {
             return $guild->id;
-        })->intersect($guildsId);
-
-        return $inGuildList->all();
+        })->intersect($guildsId)->all();
     }
 
     /**

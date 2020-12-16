@@ -19,23 +19,17 @@ class DashboardController extends Controller
         $apiclient = app(ApiClient::class);
         $discord = new Discord($apiclient);
         $guilds = $discord->guilds();
+        $guildPerm = $guilds->filter(function ($guild){
+            return $guild->userCan(Discord\Permissions\Permission::ADMINISTRATOR);
+        });
+        $guildPermId = $guildPerm->map(function ($guild){
+            return $guild->id;
+        });
 
-        $InGuildList = array();
-        $NotInGuildList = array();
-        $botGuilds = app(DiscordClient::class)->user->getCurrentUserGuilds();
+        $guildList = DiscordUtils::isBotInGuilds($guildPermId);
 
-        foreach ($guilds as $guild) {
-            foreach ($botGuilds as $guildBot) {
-                if ($guild->id == $guildBot->id)
-                {
-                    array_push($InGuildList,$guild);
-                    continue;
-                }
-            }
-            array_push($NotInGuildList,$guild);
-            continue;
-
-        }
+        $InGuildList = $guildPerm->whereIn('id', $guildList);
+        $NotInGuildList = $guildPerm->whereNotIn('id', $guildList);
 
         return view('dashboard.servers.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
     }
