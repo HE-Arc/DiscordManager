@@ -78,7 +78,7 @@ class DashboardController extends Controller
     private function addRoles(Request $request)
     {
         $result = DiscordUtils::addGuildMembersRoles(
-            $request->get('id'),
+            $request->id,
             $request->input('usersId'),
             $request->input('rolesId'));
         if (isEmpty($result)) dd($result);
@@ -87,7 +87,7 @@ class DashboardController extends Controller
     private function removeRoles(Request $request)
     {
         $result = DiscordUtils::removeGuildMembersRoles(
-            $request->get('id'),
+            $request->id,
             $request->input('usersId'),
             $request->input('rolesId'));
         if (isEmpty($result)) dd($result);
