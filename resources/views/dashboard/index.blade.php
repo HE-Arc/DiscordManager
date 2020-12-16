@@ -32,12 +32,12 @@
                                     <div id="memberName" class="mx-2">
                                         <div class="text-nowrap text-truncate font-weight-bold">
                                             {{$member ->user->username}}#{{$member ->user->discriminator}}
-                                            @if($member->user->bot == true)
-                                                <span class="badge badge-primary">BOT</span>
-                                            @endif
                                         </div>
                                         @if($member->nick != null)
-                                            <small class="text-nowrap text-truncate font-italic">{{$member->nick}}</small>
+                                            <small class="text-nowrap text-truncate font-italic">{{$member->nick}}</small><br>
+                                        @endif
+                                        @if($member->user->bot == true)
+                                            <span class="badge badge-primary">BOT</span>
                                         @endif
                                     </div>
                                 </label>
