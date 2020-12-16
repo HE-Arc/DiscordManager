@@ -61,29 +61,35 @@ html, body {
     border-radius: 10px;
 }
 
+.col-sm.with-background.with-space {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 .list-group-item {
     color: #e2e8f0;
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 .list-group-flush .list-group-item {
     border-radius: 10px;
 }
 
-.list-group-item.active {
+.list-group-item-action.active {
     color: #e2e8f0;
     background-color: #7289DA;
     border: none;
 }
 
-.list-group-item:hover {
+.list-group-item-action:hover {
     color: #e2e8f0;
-    background-color: #23272A;
+    background-color: #677bc4;
     border: none;
 }
 
-.list-group-item:hover.active {
+.list-group-item-action:hover.active {
     background-color: #7289DA;
 }
 
@@ -204,4 +210,9 @@ div.content {
 
 .apply-button-container {
     text-align: right;
+}
+
+a:hover {
+    color: #677bc4;
+    text-decoration: none;
 }

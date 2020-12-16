@@ -5,13 +5,14 @@
     <main role="main" class="container mt-5">
         <div class="container">
             <div class="row">
-                <div class="col-sm">
+                <div class="col-sm with-background">
                     <h1 class="light-writing">Manage server</h1>
                     <ul class=" list-group list-group-flush">
                         @foreach ($InGuildList as $guild)
                             <li class="list-group-item" >
+                                <a href="{{route("dashboard.server",$guild->id)}}">
                                 <h5 >
-                                    <a href="{{route("dashboard.server",$guild->id)}}">
+
                                         <img
                                             @if($guild->icon != null)
                                             src="https://cdn.discordapp.com/icons/{{$guild->id}}/{{$guild->icon}}.png"
@@ -25,14 +26,15 @@
                                         @if($guild->owner == true)
                                             <span class="badge badge-primary" >Owner</span>
                                         @endif
-                                    </a>
+
                                 </h5>
+                                </a>
                             </li>
                         @endforeach
 
                     </ul>
                 </div>
-                <div class="col-sm">
+                <div class="col-sm with-background with-space">
                     <h1 class="light-writing" >Add server</h1>
                     <ul class="list-group list-group-flush" >
                         <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
