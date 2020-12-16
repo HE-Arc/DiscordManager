@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <h1 >Manage server</h1>
+                    <h1 class="light-writing">Manage server</h1>
                     <ul class=" list-group list-group-flush">
                         @foreach ($InGuildList as $guild)
                             <li class="list-group-item" >
@@ -33,7 +33,7 @@
                     </ul>
                 </div>
                 <div class="col-sm">
-                    <h1 >Add server</h1>
+                    <h1 class="light-writing" >Add server</h1>
                     <ul class="list-group list-group-flush" >
                         <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
                         @foreach ($NotInGuildList as $guild)

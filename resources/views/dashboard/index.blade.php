@@ -3,8 +3,8 @@
 @section('content')
     @include('dashboard.component')
     <div class="row " id="dashboard">
-
-        <div class="col-8 " id="insidedb">
+        @yield('nav2')
+        <div class="col-8  " id="insidedb">
             <form method="POST" action="">
                 @csrf
                 <div class="row">
@@ -105,6 +105,6 @@
             </form>
 
         </div>
-    </div>
+
 @endsection
 
