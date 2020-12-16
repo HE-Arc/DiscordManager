@@ -5,7 +5,7 @@
     <main role="main" class="container mt-5">
         <div class="container">
             <div class="row">
-                <div class="col-sm advancedGroupList">
+                <div class="col-sm with-background advancedGroupList">
                     <h1 class="light-writing">Manage server</h1>
                     <div class="md-form mt-0">
                         <input class="form-control dark-mode searchbar" type="text" placeholder="Search"
@@ -22,7 +22,7 @@
                                         src="https://cdn.discordapp.com/app-icons/761513537825669130/6436659f90801b9ac8b9a5e7dac56bfb.png"
                                         @endif
                                         alt="Image de guilde"
-                                        class="rounded-circle mx-2">
+                                        class="rounded-circle">
                                     <div class="mx-2">
                                         <div class="text-nowrap text-truncate font-weight-bold">
                                             {{$guild->name}}<br>
@@ -37,7 +37,7 @@
 
                     </div>
                 </div>
-                <div class="col-sm advancedGroupList">
+                <div class="col-sm with-background advancedGroupList">
                     <h1 class="light-writing" >Add server</h1>
                     <div class="md-form mt-0">
                         <input class="form-control dark-mode searchbar" type="text" placeholder="Search"
