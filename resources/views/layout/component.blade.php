@@ -2,7 +2,7 @@
 @section('header')
 <header>
     <nav class="navbar navbar-expand-md navbar-dark">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <img src="/logo.svg" alt="" width="30" height="30">
             Discord Manager</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
