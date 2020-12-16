@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('image')->nullable();
             $table->string('token')->unique();
             $table->string('refresh_token')->unique();
+            $table->string('expires_in');
             $table->rememberToken();
             $table->timestamps();
         });

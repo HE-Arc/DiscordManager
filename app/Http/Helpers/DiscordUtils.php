@@ -4,7 +4,6 @@
 namespace App\Http\Helpers;
 
 use GuzzleHttp\Command\Exception\CommandClientException;
-use http\Exception;
 use RestCord\DiscordClient;
 
 class DiscordUtils
@@ -16,11 +15,10 @@ class DiscordUtils
      */
     public static function isBotInGuild($guildId)
     {
-        $guilds = app(DiscordClient::class)->user->getCurrentUserGuilds();
-        foreach ($guilds as $guild) {
-            if ($guild->id == $guildId) return true;
-        }
-        return false;
+        $guilds = collect(app(DiscordClient::class)->user->getCurrentUserGuilds());
+        return $guilds->map(function ($guild) {
+            return $guild->id;
+        })->contains($guildId);
     }
 
     /**
@@ -30,13 +28,12 @@ class DiscordUtils
      */
     public static function isBotInGuilds($guildsId)
     {
-        $inGuildList = array();
-        $guilds = app(DiscordClient::class)->user->getCurrentUserGuilds();
-        foreach ($guilds as $guild) {
-            foreach ($guildsId as $guildId)
-                if ($guild->id == $guildId) array_push($inGuildList, $guild->id);
-        }
-        return $inGuildList;
+        $guilds = collect(app(DiscordClient::class)->user->getCurrentUserGuilds());
+        $inGuildList = $guilds->map(function ($guild) {
+            return $guild->id;
+        })->intersect($guildsId);
+
+        return $inGuildList->all();
     }
 
     /**
@@ -47,11 +44,17 @@ class DiscordUtils
      */
     public static function addGuildMembersRoles($guildId, $usersId, $rolesId)
     {
+        $results = [];
         foreach ($usersId as $userId) {
             foreach ($rolesId as $roleId) {
-                app(DiscordClient::class)->guild->addGuildMemberRole(['guild.id' => $guildId, 'user.id' => $userId, 'role.id' => $roleId]);
+                try {
+                    app(DiscordClient::class)->guild->addGuildMemberRole(['guild.id' => intval($guildId), 'user.id' => intval($userId), 'role.id' => intval($roleId)]);
+                } catch (CommandClientException $exception) {
+                    $results[$userId] = self::handleDiscordException($exception);
+                }
             }
         }
+        return $results;
     }
 
     /**
@@ -62,11 +65,18 @@ class DiscordUtils
      */
     public static function removeGuildMembersRoles($guildId, $usersId, $rolesId)
     {
+        $results = [];
         foreach ($usersId as $userId) {
             foreach ($rolesId as $roleId) {
-                app(DiscordClient::class)->guild->removeGuildMemberRole(['guild.id' => $guildId, 'user.id' => $userId, 'role.id' => $roleId]);
+                try {
+                    app(DiscordClient::class)->guild->removeGuildMemberRole(['guild.id' => $guildId, 'user.id' => $userId, 'role.id' => $roleId]);
+                } catch (CommandClientException $exception) {
+                    $results[$userId] = self::handleDiscordException($exception);
+                }
             }
         }
+
+        return $results;
     }
 
     /**
@@ -75,29 +85,37 @@ class DiscordUtils
      */
     public static function removeGuildMembers($guildId, $usersId)
     {
+        $results = [];
         foreach ($usersId as $userId) {
-            app(DiscordClient::class)->guild->removeGuildMember(['guild.id' => $guildId, 'user.id' => $userId]);
+            try {
+                app(DiscordClient::class)->guild->removeGuildMember(['guild.id' => intval($guildId), 'user.id' => intval($userId)]);
+            } catch (CommandClientException $exception) {
+                $results[$userId] = self::handleDiscordException($exception);
+            }
         }
+        return $results;
+
     }
 
     /**
-     * @deprecated Problem with Restcord api
      * @param $guildId
      * @param $usersId
      * @param string $reason
      * @param int $deleteMessageDays
+     * @deprecated Problem with Restcord api
      */
     public static function createGuildBans($guildId, $usersId, $reason = "", $deleteMessageDays = 0)
     {
         foreach ($usersId as $userId) {
-            app(DiscordClient::class)->guild->createGuildBan(['guild.id' => $guildId, 'user.id' => $userId, 'reason'=>$reason, 'delete_message_days' =>$deleteMessageDays]);
+            app(DiscordClient::class)->guild->createGuildBan(['guild.id' => $guildId, 'user.id' => $userId, 'reason' => $reason, 'delete_message_days' => $deleteMessageDays]);
         }
+
     }
 
     /**
-     * @deprecated Problem with Restcord api
      * @param $guildId
      * @param $usersId
+     * @deprecated Problem with Restcord api
      */
     public static function removeGuildBans($guildId, $usersId)
     {
@@ -106,7 +124,34 @@ class DiscordUtils
         }
     }
 
-    public static function handleDiscordException(CommandClientException $exception){
+    public static function listWorkableRoles($guildId){
+        $botId = app(DiscordClient::class)->user->getCurrentUser()->id;
+        $botRoles = app(DiscordClient::class)->guild->getGuildMember(['guild.id' => $guildId, 'user.id' => $botId])->roles;
+        $roles = collect(app(DiscordClient::class)->guild->getGuildRoles(['guild.id' => $guildId]));
+        $maxBotRolesPosition = $roles->whereIn('id', $botRoles)->max('position');
+        $filteredRoles = $roles->where('managed', false)->whereBetween('position', [0, $maxBotRolesPosition]);
+        return $filteredRoles->all();
+    }
 
+    public static function handleDiscordException(CommandClientException $exception)
+    {
+        dd($exception);
+        $code = $exception->getResponse()->getStatusCode();
+
+        $result = [$code=>""];
+        switch ($code) {
+            case 403:
+                $result[$code] = "Vous n'avez pas les permissions de faire cela !";
+                break;
+            case 401:
+                $result[$code] = "Votre session est probablement trop vielle essayez de vous reconnectez.";
+                break;
+            case 429:
+                $result[$code] = "Vous avez trop solicitez l'API discord veuillez resssayez plus tard.";
+                break;
+            default:
+                $result[$code] = "Erreur interne réessayez plus tard ou contactez un administrateur";
+        }
+        return $result;
     }
 }
