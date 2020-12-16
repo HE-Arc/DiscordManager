@@ -47,7 +47,7 @@
                         <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
                             @foreach ($NotInGuildList as $guild)
                                 <label class="list-group-item d-flex justify-content-start align-items-center">
-                                    <a class="d-flex flex-row" href="{{route("dashboard.server",$guild->id)}}">
+                                    <a class="d-flex flex-row" href="{{route("add-bot",$guild->id)}}">
                                         <img
                                             @if($guild->icon != null)
                                             src="https://cdn.discordapp.com/icons/{{$guild->id}}/{{$guild->icon}}.png"
