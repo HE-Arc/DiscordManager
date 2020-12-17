@@ -134,7 +134,7 @@
 
                 </div>
                 <div class="apply-button-container">
-                    <input class="btn btn-primary btn-lg apply-button" type="button" value="Apply changes" id="submitBtn" onclick="$('#myModal').modal('show');">
+                    <input class="btn btn-primary btn-lg apply-button" type="submit" value="Apply changes" id="submitBtn">
                 </div>
             </form>
 
@@ -151,10 +151,6 @@
                         <div class="modal-body">
                             Please wait while our owls are working on your request.
                         </div>
-{{--                        <div class="modal-footer">--}}
-{{--                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
-{{--                            <button type="button" class="btn btn-primary">Save changes</button>--}}
-{{--                        </div>--}}
                     </div>
                 </div>
             </div>

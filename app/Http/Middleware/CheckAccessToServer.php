@@ -35,12 +35,6 @@ class CheckAccessToServer
     public function handle(Request $request, Closure $next)
     {
         $guildID = $request->route()->parameter("id");
-
-//        if ($this->session->get("dontCheckAccess",false))
-//        {
-//            return $next($request);
-//        }
-
         $guilds = DiscordUtils::getClientGuilds();
 
         if (!is_null($guildID)) {
