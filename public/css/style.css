@@ -220,3 +220,8 @@ a:hover {
     color: #677bc4;
     text-decoration: none;
 }
+
+.modal-content{
+    background-color: #23272a;
+    color: #ffffff;
+}
