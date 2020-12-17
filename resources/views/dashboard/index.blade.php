@@ -149,7 +149,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            Please wait while our owls are working on your request.
+                            Please wait, our owls are working on your request.
                         </div>
 {{--                        <div class="modal-footer">--}}
 {{--                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
