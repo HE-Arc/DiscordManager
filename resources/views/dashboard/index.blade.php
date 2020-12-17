@@ -26,7 +26,7 @@
                                         @if($member->user->avatar != null)
                                         src="https://cdn.discordapp.com/avatars/{{$member->user->id}}/{{$member->user->avatar}}.png?size=128"
                                         @else
-                                        src="https://cdn.discordapp.com/app-icons/761513537825669130/6436659f90801b9ac8b9a5e7dac56bfb.png"
+                                        src="/logo.svg"
                                         @endif
                                         alt="Image de guilde"
                                         class="rounded-circle mx-2">
