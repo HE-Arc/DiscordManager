@@ -209,3 +209,8 @@ div.content {
 .apply-button-container {
     text-align: right;
 }
+
+.modal-content{
+    background-color: #23272a;
+    color: #ffffff;
+}
