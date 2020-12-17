@@ -39,26 +39,21 @@ class CheckAccessToServer
         $discord = new Discord($apiclient);
         $guilds = $discord->guilds();
         DiscordUtils::$clientGuilds = $guilds;
-//        dd(!is_null($guildID));
         if (!is_null($guildID)) {
             $guildID = intval($guildID);
             try {
-
                 $guild = $guilds->where("id", $guildID)->first;
                 if ($guild->isNotEmpty()) {
-//                    dd("yo1");
                     if ($guild->userCan(Discord\Permissions\Permission::ADMINISTRATOR)) {
-//                        dd("yo");
                         return $next($request);
                     }
                 }
                 throw new \Exception($request->get("You can not access this server!"));
+
             } catch (\Exception $e) {
-//                dd("yo?");
                 return redirect()->back()->with(['status' => 'alert-danger', 'status_msg' => $e->getMessage()]);
             }
         }
-//        dd("yodnajsdhaihdj?");
         return $next($request);
     }
 }

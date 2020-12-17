@@ -63,7 +63,6 @@ class LoginController extends Controller
 
     public function addBot($id)
     {
-        dd("salut");
 //        $apiclient = app(Discord\ApiClient::class);
 //        $discord = new Discord($apiclient);
 

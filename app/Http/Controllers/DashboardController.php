@@ -35,7 +35,7 @@ class DashboardController extends Controller
 
     public function server($id)
     {
-        $discordClientGuild = app(DiscordClient::class)->guild;
+        $discordClientGuild = app('DiscordClient')->guild;
         $guild = $discordClientGuild->getGuild(['guild.id' => intval($id)]);
         $members = $discordClientGuild->listGuildMembers(['guild.id' => intval($id), 'limit' => 1000]);
         $roles = DiscordUtils::listWorkableRoles(intval($id));
@@ -45,7 +45,7 @@ class DashboardController extends Controller
 
     public function aboutServer($id)
     {
-        $guild = app(DiscordClient::class)->guild->getGuild(['guild.id' => intval($id)]);
+        $guild = app('DiscordClient')->guild->getGuild(['guild.id' => intval($id)]);
         return view('dashboard.server-info', ["guild" => $guild, "members" => [], "roles" => [], "pageName" => "Server info"]);
     }
 
@@ -62,10 +62,8 @@ class DashboardController extends Controller
                 case "kick":
                     $this->kick($request);
                     break;
-                default:
             }
         }
-
     }
 
     private function addRoles(Request $request)
@@ -74,7 +72,8 @@ class DashboardController extends Controller
             $request->id,
             $request->input('usersId'),
             $request->input('rolesId'));
-        if (isEmpty($result)) dd($result);
+        if(!isEmpty($result)) dd($result);
+        return redirect()->route('dashboard.server', $request->id);
     }
 
     private function removeRoles(Request $request)
@@ -83,7 +82,8 @@ class DashboardController extends Controller
             $request->id,
             $request->input('usersId'),
             $request->input('rolesId'));
-        if (isEmpty($result)) dd($result);
+        if(!isEmpty($result)) dd($result);
+        return redirect()->route('dashboard.server', $request->id);
     }
 
     private function kick(Request $request)
@@ -92,6 +92,7 @@ class DashboardController extends Controller
             $request->id,
             $request->input('usersId'));
         if (!isEmpty($result)) dd($result);
+        return redirect()->route('dashboard.server', $request->id);
     }
 
 }

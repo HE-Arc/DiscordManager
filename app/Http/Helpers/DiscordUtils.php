@@ -5,6 +5,7 @@ namespace App\Http\Helpers;
 
 use GuzzleHttp\Command\Exception\CommandClientException;
 use RestCord\DiscordClient;
+use RestCord\RateLimit\RatelimitException;
 
 class DiscordUtils
 {
@@ -17,7 +18,7 @@ class DiscordUtils
      */
     public static function isBotInGuild($guildId)
     {
-        $guilds = collect(app(DiscordClient::class)->user->getCurrentUserGuilds());
+        $guilds = collect(app('DiscordClient')->user->getCurrentUserGuilds());
         return $guilds->map(function ($guild) {
             return $guild->id;
         })->contains($guildId);
@@ -30,7 +31,7 @@ class DiscordUtils
      */
     public static function isBotInGuilds($guildsId)
     {
-        $guilds = collect(app(DiscordClient::class)->user->getCurrentUserGuilds());
+        $guilds = collect(app('DiscordClient')->user->getCurrentUserGuilds());
         return $inGuildList = $guilds->map(function ($guild) {
             return $guild->id;
         })->intersect($guildsId)->all();
@@ -41,6 +42,7 @@ class DiscordUtils
      * @param $guildId
      * @param $usersId
      * @param $rolesId
+     * @return array
      */
     public static function addGuildMembersRoles($guildId, $usersId, $rolesId)
     {
@@ -48,9 +50,9 @@ class DiscordUtils
         foreach ($usersId as $userId) {
             foreach ($rolesId as $roleId) {
                 try {
-//                    new DiscordClient()->
-                    app(DiscordClient::class)->guild->addGuildMemberRole(['guild.id' => intval($guildId), 'user.id' => intval($userId), 'role.id' => intval($roleId)]);
-                } catch (CommandClientException $exception) {
+                    app('DiscordClient')->guild->addGuildMemberRole(['guild.id' => intval($guildId), 'user.id' => intval($userId), 'role.id' => intval($roleId)]);
+                }
+                catch (CommandClientException $exception) {
                     $results[$userId] = self::handleDiscordException($exception);
                 }
             }
@@ -63,6 +65,7 @@ class DiscordUtils
      * @param $guildId
      * @param $usersId
      * @param $rolesId
+     * @return array
      */
     public static function removeGuildMembersRoles($guildId, $usersId, $rolesId)
     {
@@ -70,7 +73,7 @@ class DiscordUtils
         foreach ($usersId as $userId) {
             foreach ($rolesId as $roleId) {
                 try {
-                    app(DiscordClient::class)->guild->removeGuildMemberRole(['guild.id' => $guildId, 'user.id' => $userId, 'role.id' => $roleId]);
+                    app('DiscordClient')->guild->removeGuildMemberRole(['guild.id' => intval($guildId), 'user.id' => intval($userId), 'role.id' => intval($roleId)]);
                 } catch (CommandClientException $exception) {
                     $results[$userId] = self::handleDiscordException($exception);
                 }
@@ -83,13 +86,14 @@ class DiscordUtils
     /**
      * @param $guildId
      * @param $usersId
+     * @return array
      */
     public static function removeGuildMembers($guildId, $usersId)
     {
         $results = [];
         foreach ($usersId as $userId) {
             try {
-                app(DiscordClient::class)->guild->removeGuildMember(['guild.id' => intval($guildId), 'user.id' => intval($userId)]);
+                app('DiscordClient')->guild->removeGuildMember(['guild.id' => intval($guildId), 'user.id' => intval($userId)]);
             } catch (CommandClientException $exception) {
                 $results[$userId] = self::handleDiscordException($exception);
             }
@@ -108,7 +112,7 @@ class DiscordUtils
     public static function createGuildBans($guildId, $usersId, $reason = "", $deleteMessageDays = 0)
     {
         foreach ($usersId as $userId) {
-            app(DiscordClient::class)->guild->createGuildBan(['guild.id' => $guildId, 'user.id' => $userId, 'reason' => $reason, 'delete_message_days' => $deleteMessageDays]);
+            app('DiscordClient')->guild->createGuildBan(['guild.id' => $guildId, 'user.id' => $userId, 'reason' => $reason, 'delete_message_days' => $deleteMessageDays]);
         }
 
     }
@@ -121,15 +125,16 @@ class DiscordUtils
     public static function removeGuildBans($guildId, $usersId)
     {
         foreach ($usersId as $userId) {
-            dd(app(DiscordClient::class)->guild->removeGuildBan(['guild.id' => $guildId, 'user.id' => $userId]));
+            dd(app('DiscordClient')->guild->removeGuildBan(['guild.id' => $guildId, 'user.id' => $userId]));
         }
     }
 
+
     public static function listWorkableRoles($guildId)
     {
-        $botId = app(DiscordClient::class)->user->getCurrentUser()->id;
-        $botRoles = app(DiscordClient::class)->guild->getGuildMember(['guild.id' => $guildId, 'user.id' => $botId])->roles;
-        $roles = collect(app(DiscordClient::class)->guild->getGuildRoles(['guild.id' => $guildId]));
+        $botId = app('DiscordClient')->user->getCurrentUser()->id;
+        $botRoles = app('DiscordClient')->guild->getGuildMember(['guild.id' => $guildId, 'user.id' => $botId])->roles;
+        $roles = collect(app('DiscordClient')->guild->getGuildRoles(['guild.id' => $guildId]));
         $maxBotRolesPosition = $roles->whereIn('id', $botRoles)->max('position');
         $filteredRoles = $roles->where('managed', false)->whereBetween('position', [0, $maxBotRolesPosition-1]);
         return $filteredRoles->skip(1)->all(); //everyone is ALWAYS the first of the list
@@ -137,7 +142,6 @@ class DiscordUtils
 
     public static function handleDiscordException(CommandClientException $exception)
     {
-        dd($exception);
         $code = $exception->getResponse()->getStatusCode();
 
         $result = [$code => ""];

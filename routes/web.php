@@ -43,9 +43,7 @@ Route::group([
         Route::get('/{id}', [DashboardController::class, 'server'])->name("dashboard.server");
         Route::post('/{id}', [DashboardController::class, 'update'])->name("dashboard.server");
     });
-
-    Route::get('/add-bot/{id}',[LoginController::class, 'addBot'])->name("add-bot");
-    Route::get('/discord/bot-added', [LoginController::class, 'handleBotCallback']);
+    
     Route::get('/logout', [LoginController::class, 'logout'])->name("logout");
 });
 

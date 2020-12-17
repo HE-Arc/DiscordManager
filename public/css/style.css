@@ -59,6 +59,7 @@ html, body {
 .col-sm.with-background{
     background-color: #23272A;
     border-radius: 10px;
+    margin: 20px;
 }
 
 .col-sm.with-background.with-space {
@@ -220,3 +221,23 @@ a:hover {
     color: #677bc4;
     text-decoration: none;
 }
+
+.modal-content{
+    background-color: #23272a;
+    color: #edf2f7;
+    border-radius: 8px;
+}
+
+.close{
+    color: #edf2f7;
+}
+.close:hover{
+    color: #edf2f7;
+}
+
+.modal-header{
+    border-bottom: none;
+    background-color: #23272a;
+}
+
+
