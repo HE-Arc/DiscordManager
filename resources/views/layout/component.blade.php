@@ -5,9 +5,7 @@
         <a class="navbar-brand" href="/">
             <img src="/logo.svg" alt="" width="30" height="30">
             Discord Manager</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+
         <ul class="navbar-nav ml-auto">
             @if (\Illuminate\Support\Facades\Auth::check())
                 @if (Route::has('dashboard'))
