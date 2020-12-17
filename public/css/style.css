@@ -223,5 +223,20 @@ a:hover {
 
 .modal-content{
     background-color: #23272a;
-    color: #ffffff;
+    color: #edf2f7;
+    border-radius: 8px;
 }
+
+.close{
+    color: #edf2f7;
+}
+.close:hover{
+    color: #edf2f7;
+}
+
+.modal-header{
+    border-bottom: none;
+    background-color: #23272a;
+}
+
+

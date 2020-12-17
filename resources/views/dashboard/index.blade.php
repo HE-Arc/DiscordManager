@@ -142,14 +142,14 @@
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" >
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"><img src="/logo.svg" alt="" width="100" height="100" class="mx-auto d-block" ></h5>
+                        <div class="modal-header d-flex justify-content-center " >
+                            <h5 class="modal-title " id="exampleModalLabel"><img src="/logo.svg" alt="" width="100" height="100"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            🦉 Please wait while our owls are working on your request. 🦉
+                            Please wait while our owls are working on your request.
                         </div>
 {{--                        <div class="modal-footer">--}}
 {{--                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
