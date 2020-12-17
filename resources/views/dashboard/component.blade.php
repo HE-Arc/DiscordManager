@@ -41,8 +41,8 @@
                         {{ $pageName }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Members</a></li>
-                        <li><a class="dropdown-item" href="#">Server info</a></li>
+                        <li><a class="dropdown-item" href="/dashboard/{{$guild->id}}">Members</a></li>
+                        <li><a class="dropdown-item" href="/dashboard/about-server/{{$guild->id}}">Server info</a></li>
                     </ul>
                 </li>
             </ul>

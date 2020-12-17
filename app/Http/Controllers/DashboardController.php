@@ -44,15 +44,21 @@ class DashboardController extends Controller
         return view('dashboard.index', ["guild" => $guild, "members" => $members, "roles" => $roles, "pageName" => "Members"]);
     }
 
+    public function aboutServer($id)
+    {
+        $guild = app(DiscordClient::class)->guild->getGuild(['guild.id' => intval($id)]);
+        return view('dashboard.server-info', ["guild" => $guild, "members" => [], "roles" => [], "pageName" => "Server info"]);
+    }
+
     public function update(Request $request)
     {
-        if($request->has('action')){
+        if ($request->has('action')) {
             switch ($request->get('action')) {
                 case "addRoles":
-                    if($request->has(['rolesId', 'usersId'])) $this->addRoles($request);
+                    if ($request->has(['rolesId', 'usersId'])) $this->addRoles($request);
                     break;
                 case "removeRoles":
-                    if($request->has(['rolesId', 'usersId'])) $this->removeRoles($request);
+                    if ($request->has(['rolesId', 'usersId'])) $this->removeRoles($request);
                     break;
                 case "kick":
                     $this->kick($request);
@@ -86,7 +92,7 @@ class DashboardController extends Controller
         $result = DiscordUtils::removeGuildMembers(
             $request->id,
             $request->input('usersId'));
-        if(!isEmpty($result)) dd($result);
+        if (!isEmpty($result)) dd($result);
     }
 
 }
