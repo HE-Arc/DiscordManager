@@ -69,30 +69,6 @@
                             @endforeach
                         </div>
                     </div>
-{{--                    <script type="text/javascript">--}}
-{{--                        $(document).ready(function () {--}}
-{{--                            $("#searchAddedServer").on("keyup", function () {--}}
-{{--                                var value = $(this).val().toLowerCase();--}}
-{{--                                $("#listAdded label").filter(function () {--}}
-{{--                                    if ($(this).text().toLowerCase().indexOf(value) > -1) {--}}
-{{--                                        $(this).show();--}}
-{{--                                    } else {--}}
-{{--                                        $(this).attr('style', 'display: none !important');--}}
-{{--                                    }--}}
-{{--                                });--}}
-{{--                            });--}}
-{{--                            $("#searchNotAddedServer").on("keyup", function () {--}}
-{{--                                var value = $(this).val().toLowerCase();--}}
-{{--                                $("#listNotAdded label").filter(function () {--}}
-{{--                                    if ($(this).text().toLowerCase().indexOf(value) > -1) {--}}
-{{--                                        $(this).show();--}}
-{{--                                    } else {--}}
-{{--                                        $(this).attr('style', 'display: none !important');--}}
-{{--                                    }--}}
-{{--                                });--}}
-{{--                            });--}}
-{{--                        });--}}
-{{--                    </script>--}}
                 </div>
             </div>
         </div>

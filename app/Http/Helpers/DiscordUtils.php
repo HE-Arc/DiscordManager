@@ -9,6 +9,8 @@ use RestCord\RateLimit\RatelimitException;
 
 class DiscordUtils
 {
+    public static $clientGuilds = null;
+
     /**
      * Check if the bot is in the specified guild with id
      * @param $guildId
