@@ -16,10 +16,10 @@ class DashboardController extends Controller
     public function servers(Request $request)
     {
         $guilds = DiscordUtils::getClientGuilds();
-        $guildPerm = $guilds->filter(function ($guild){
+        $guildPerm = $guilds->filter(function ($guild) {
             return $guild->userCan(Discord\Permissions\Permission::ADMINISTRATOR);
         });
-        $guildPermId = $guildPerm->map(function ($guild){
+        $guildPermId = $guildPerm->map(function ($guild) {
             return $guild->id;
         });
 
@@ -28,7 +28,7 @@ class DashboardController extends Controller
         $InGuildList = $guildPerm->whereIn('id', $guildList);
         $NotInGuildList = $guildPerm->whereNotIn('id', $guildList);
 
-        return view('dashboard.servers.index', ["InGuildList"=>$InGuildList,"NotInGuildList"=>$NotInGuildList]);
+        return view('dashboard.servers.index', ["InGuildList" => $InGuildList, "NotInGuildList" => $NotInGuildList]);
     }
 
     public function server($id)
@@ -49,48 +49,41 @@ class DashboardController extends Controller
 
     public function update(Request $request)
     {
+        $result = [];
         if ($request->has('action')) {
             switch ($request->get('action')) {
                 case "addRoles":
-                    if ($request->has(['rolesId', 'usersId'])) $this->addRoles($request);
+                    if ($request->has(['rolesId', 'usersId'])) {
+                        $result = $this->addRoles($request->id, $request->input('usersId'), $request->input('rolesId'));
+                    }
                     break;
                 case "removeRoles":
-                    if ($request->has(['rolesId', 'usersId'])) $this->removeRoles($request);
+                    if ($request->has(['rolesId', 'usersId'])) {
+                        $result = $this->removeRoles($request->id, $request->input('usersId'), $request->input('rolesId'));
+                    }
                     break;
                 case "kick":
-                    $this->kick($request);
+                    $result = $this->kick($request->id, $request->input('usersId'));
                     break;
             }
         }
-    }
-
-    private function addRoles(Request $request)
-    {
-        $result = DiscordUtils::addGuildMembersRoles(
-            $request->id,
-            $request->input('usersId'),
-            $request->input('rolesId'));
-        if(!isEmpty($result)) dd($result);
-        return redirect()->route('dashboard.server', $request->id);
-    }
-
-    private function removeRoles(Request $request)
-    {
-        $result = DiscordUtils::removeGuildMembersRoles(
-            $request->id,
-            $request->input('usersId'),
-            $request->input('rolesId'));
-        if(!isEmpty($result)) dd($result);
-        return redirect()->route('dashboard.server', $request->id);
-    }
-
-    private function kick(Request $request)
-    {
-        $result = DiscordUtils::removeGuildMembers(
-            $request->id,
-            $request->input('usersId'));
         if (!isEmpty($result)) dd($result);
-        return redirect()->route('dashboard.server', $request->id);
+        return redirect()->route('lel', $request->id);
+    }
+
+    private function addRoles($id, $usersId, $rolesId)
+    {
+        return DiscordUtils::addGuildMembersRoles($id, $usersId, $rolesId);
+    }
+
+    private function removeRoles($id, $usersId, $rolesId)
+    {
+        return DiscordUtils::removeGuildMembersRoles($id, $usersId, $rolesId);
+    }
+
+    private function kick($id, $usersId)
+    {
+        return DiscordUtils::removeGuildMembers($id, $usersId);
     }
 
 }

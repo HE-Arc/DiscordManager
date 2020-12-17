@@ -6,7 +6,7 @@
     @yield('nav2')
     <div class=" d-flex justify-content-around " id="dashboard">
         <div class="col-10" id="insidedb">
-            <form method="POST" action="" onsubmit="$('#myModal').modal('show'); $('#submitBtn').attr('disabled', true);">
+            <form method="POST" action="{{route("dashboard.update",$guild->id)}}" onsubmit="$('#myModal').modal('show'); $('#submitBtn').attr('disabled', true);">
                 @csrf
                 <div class="row">
 
