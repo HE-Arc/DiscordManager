@@ -18,7 +18,7 @@
     <script src="https://kit.fontawesome.com/60010d6147.js" crossorigin="anonymous"></script>
     <link href="/css/style.css" rel="stylesheet">
     <script src="/js/searchbar.js"></script>
-
+    <link rel="icon" href="/logo.svg" type="image/icon type">
     @yield('script_include')
     @yield('webgl_include')
     @yield('script')

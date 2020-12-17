@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Session;
 use LaravelRestcord\Discord\Bots\HandlesBotAddedToGuild;
 use Illuminate\Http\RedirectResponse;
 use LaravelRestcord\Discord\Guild;
-use RestCord\DiscordClient;
 
 class BotAddedToDiscordGuild
 {

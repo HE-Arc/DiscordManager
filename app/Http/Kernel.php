@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\CheckIfDiscordTokenValid;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -22,7 +21,6 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-//        \LaravelRestcord\Http\Middleware\InstantiateApiClientWithTokenFromSession::class,
     ];
 
     /**
@@ -39,7 +37,6 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-//            \LaravelRestcord\Http\Middleware\InstantiateApiClientWithTokenFromSession::class,
         ],
 
         'api' => [
@@ -65,8 +62,10 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'refresh' => \App\Http\Middleware\CheckIfDiscordTokenValid::class,
         'redirectIfAuth' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-//        'sessionHasDiscordToken' => \LaravelRestcord\Http\Middleware\InstantiateApiClientWithTokenFromSession::class,
+        'refreshDiscordToken' => \App\Http\Middleware\CheckIfDiscordTokenValid::class,
+        'checkAccessToServer' => \App\Http\Middleware\CheckAccessToServer::class,
+        'checkBotAdded' => \App\Http\Middleware\CheckBotAdded::class,
+        'sessionHasDiscordToken' => \LaravelRestcord\Http\Middleware\InstantiateApiClientWithTokenFromSession::class,
     ];
 }

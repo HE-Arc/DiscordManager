@@ -59,6 +59,7 @@ html, body {
 .col-sm.with-background{
     background-color: #23272A;
     border-radius: 10px;
+    margin: 20px;
 }
 
 .col-sm.with-background.with-space {
