@@ -35,10 +35,14 @@ class CheckAccessToServer
     public function handle(Request $request, Closure $next)
     {
         $guildID = $request->route()->parameter("id");
-        $apiclient = app(ApiClient::class);
-        $discord = new Discord($apiclient);
-        $guilds = $discord->guilds();
-        DiscordUtils::$clientGuilds = $guilds;
+
+//        if ($this->session->get("dontCheckAccess",false))
+//        {
+//            return $next($request);
+//        }
+
+        $guilds = DiscordUtils::getClientGuilds();
+
         if (!is_null($guildID)) {
             $guildID = intval($guildID);
             try {
@@ -48,7 +52,7 @@ class CheckAccessToServer
                         return $next($request);
                     }
                 }
-                throw new \Exception($request->get("You can not access this server!"));
+                throw new \Exception("You can not access this server!");
 
             } catch (\Exception $e) {
                 return redirect()->back()->with(['status' => 'alert-danger', 'status_msg' => $e->getMessage()]);

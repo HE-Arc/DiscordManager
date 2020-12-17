@@ -45,8 +45,9 @@ class CheckBotAdded
                 if (DiscordUtils::isBotInGuild($guildID)) {
                     return $next($request);
                 }
-                throw new \Exception($request->get("\"Discord Manager\" can not manage this server!"));
+                throw new \Exception("\"Discord Manager\" can not manage this server!");
             } catch (\Exception $e) {
+//                session()->flash("dontCheckAccess",true);
                 return redirect()->back()->with(['status' => 'alert-danger', 'status_msg' => $e->getMessage()]);
             }
         }

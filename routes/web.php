@@ -24,27 +24,35 @@ Route::group([
 });
 
 Route::group([
+    'middleware' => ['auth','refreshDiscordToken','sessionHasDiscordToken']
+], function (){
+    Route::prefix('dashboard')->group(function () {
+        Route::get("/", [DashboardController::class, 'servers'])->name("dashboard");
+    });
+    Route::get('/discord/bot-added', [LoginController::class, 'handleBotCallback']);
+    Route::get('/logout', [LoginController::class, 'logout'])->name("logout");
+});
+
+Route::group([
     'middleware' => ['auth','refreshDiscordToken','sessionHasDiscordToken',"checkAccessToServer"]
 ], function (){
     Route::get('/add-bot/{id}',[LoginController::class, 'addBot'])->name("add-bot");
-    Route::get('/discord/bot-added', [LoginController::class, 'handleBotCallback']);
 });
 
 
 Route::group([
-    'middleware' => ['auth','refreshDiscordToken','sessionHasDiscordToken',"checkAccessToServer", "checkBotAdded"]
+    'middleware' => ['auth','refreshDiscordToken','sessionHasDiscordToken',"checkBotAdded","checkAccessToServer"]
 ], function (){
 
     Route::prefix('dashboard')->group(function () {
-        Route::get("/", [DashboardController::class, 'servers'])->name("dashboard");
 
         Route::get('/about-server/{id}', [DashboardController::class, 'aboutServer'])->name("dashboard.about");
 
         Route::get('/{id}', [DashboardController::class, 'server'])->name("dashboard.server");
         Route::post('/{id}', [DashboardController::class, 'update'])->name("dashboard.server");
     });
-    
-    Route::get('/logout', [LoginController::class, 'logout'])->name("logout");
+
+
 });
 
 

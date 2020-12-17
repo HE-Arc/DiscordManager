@@ -15,9 +15,7 @@ class DashboardController extends Controller
     //Affiche la page listant les serveurs (anciennement home)
     public function servers(Request $request)
     {
-        $apiclient = app(ApiClient::class);
-        $discord = new Discord($apiclient);
-        $guilds = DiscordUtils::$clientGuilds;
+        $guilds = DiscordUtils::getClientGuilds();
         $guildPerm = $guilds->filter(function ($guild){
             return $guild->userCan(Discord\Permissions\Permission::ADMINISTRATOR);
         });

@@ -66,7 +66,7 @@ class LoginController extends Controller
 //        $apiclient = app(Discord\ApiClient::class);
 //        $discord = new Discord($apiclient);
 
-        $guilds = DiscordUtils::$clientGuilds;
+        $guilds = DiscordUtils::getClientGuilds();
 
         foreach ($guilds as $guild) {
             if ($guild->id == $id){
@@ -81,7 +81,7 @@ class LoginController extends Controller
         }else{
 //            $apiclient = app(Discord\ApiClient::class);
 //            $discord = new Discord($apiclient);
-            foreach (DiscordUtils::$clientGuilds as $guild){
+            foreach (DiscordUtils::getClientGuilds() as $guild){
                 if ($guild->id == intval($_GET['guild_id'])){
                     return app(Discord\Bots\HandlesBotAddedToGuild::class)->botAdded($guild);
                 }

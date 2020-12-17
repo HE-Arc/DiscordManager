@@ -4,12 +4,25 @@
 namespace App\Http\Helpers;
 
 use GuzzleHttp\Command\Exception\CommandClientException;
+use LaravelRestcord\Discord;
+use LaravelRestcord\Discord\ApiClient;
 use RestCord\DiscordClient;
 use RestCord\RateLimit\RatelimitException;
 
 class DiscordUtils
 {
-    public static $clientGuilds = null;
+    private static $clientGuilds = null;
+
+    public static function getClientGuilds()
+    {
+        if (is_null(DiscordUtils::$clientGuilds))
+        {
+            $apiclient = app(ApiClient::class);
+            $discord = new Discord($apiclient);
+            DiscordUtils::$clientGuilds = $discord->guilds();
+        }
+        return DiscordUtils::$clientGuilds;
+    }
 
     /**
      * Check if the bot is in the specified guild with id
