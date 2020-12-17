@@ -7,18 +7,17 @@ use App\Http\Helpers\DiscordUtils;
 use Illuminate\Http\Request;
 use LaravelRestcord\Discord;
 use LaravelRestcord\Discord\ApiClient;
-use phpDocumentor\Reflection\Types\Integer;
 use RestCord\DiscordClient;
 use function PHPUnit\Framework\isEmpty;
 
 class DashboardController extends Controller
 {
     //Affiche la page listant les serveurs (anciennement home)
-    public function servers()
+    public function servers(Request $request)
     {
         $apiclient = app(ApiClient::class);
         $discord = new Discord($apiclient);
-        $guilds = $discord->guilds();
+        $guilds = DiscordUtils::$clientGuilds;
         $guildPerm = $guilds->filter(function ($guild){
             return $guild->userCan(Discord\Permissions\Permission::ADMINISTRATOR);
         });

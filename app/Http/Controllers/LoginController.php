@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\DiscordUtils;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,9 +63,11 @@ class LoginController extends Controller
 
     public function addBot($id)
     {
-        $apiclient = app(Discord\ApiClient::class);
-        $discord = new Discord($apiclient);
-        $guilds = $discord->guilds();
+        dd("salut");
+//        $apiclient = app(Discord\ApiClient::class);
+//        $discord = new Discord($apiclient);
+
+        $guilds = DiscordUtils::$clientGuilds;
 
         foreach ($guilds as $guild) {
             if ($guild->id == $id){
@@ -77,9 +80,9 @@ class LoginController extends Controller
         if (isset($_GET['error'])){
             return app(Discord\Bots\HandlesBotAddedToGuild::class)->botNotAdded($_GET['error']);
         }else{
-            $apiclient = app(Discord\ApiClient::class);
-            $discord = new Discord($apiclient);
-            foreach ($discord->guilds() as $guild){
+//            $apiclient = app(Discord\ApiClient::class);
+//            $discord = new Discord($apiclient);
+            foreach (DiscordUtils::$clientGuilds as $guild){
                 if ($guild->id == intval($_GET['guild_id'])){
                     return app(Discord\Bots\HandlesBotAddedToGuild::class)->botAdded($guild);
                 }
