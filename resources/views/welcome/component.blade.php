@@ -88,20 +88,7 @@ function initWebGL() {
     initBuffers();
     var hour = new Date().getHours();
 
-
-    if(hour > 23 || hour < 6){
-        // charge la texture de nuit
-        texture0 = initTexture(gl, "/owl.png");
-    }else if (hour>22) {
-        // charge la texture du soir
-        texture0 = initTexture(gl, "/owl.png");
-    }else if (hour<9) {
-        // charge la texture du matin
-        texture0 = initTexture(gl, "/owl.png");
-    }else {
-        // charge la texture de jour
-        texture0 = initTexture(gl, "/owl.png");
-    }
+    texture0 = initTexture(gl, "/owl.png");
 
     tick();
 }
