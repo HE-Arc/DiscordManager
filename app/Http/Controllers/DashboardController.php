@@ -36,7 +36,7 @@ class DashboardController extends Controller
 
     public function server($id)
     {
-        $discordClientGuild = app(DiscordClient::class)->guild;
+        $discordClientGuild = app('DiscordClient')->guild;
         $guild = $discordClientGuild->getGuild(['guild.id' => intval($id)]);
         $members = $discordClientGuild->listGuildMembers(['guild.id' => intval($id), 'limit' => 1000]);
         $roles = DiscordUtils::listWorkableRoles(intval($id));
@@ -69,7 +69,7 @@ class DashboardController extends Controller
             $request->id,
             $request->input('usersId'),
             $request->input('rolesId'));
-        if(isEmpty($result)) dd($result);
+        if(!isEmpty($result)) dd($result);
     }
 
     private function removeRoles(Request $request)
@@ -78,7 +78,7 @@ class DashboardController extends Controller
             $request->id,
             $request->input('usersId'),
             $request->input('rolesId'));
-        if(isEmpty($result)) dd($result);
+        if(!isEmpty($result)) dd($result);
     }
 
     private function kick(Request $request)
