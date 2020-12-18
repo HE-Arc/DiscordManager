@@ -188,7 +188,7 @@ class DiscordUtils
             return $emoji->animated;
         });
 
-        return ['statsChannels' => $statsChannels->all(), 'nbMembers'=>$nbMembers, 'nbRoles'=>$nbRoles, 'statsEmojis' => $statsEmojis->all()];
+        return ['statsChannels' => $statsChannels, 'nbMembers'=>$nbMembers, 'nbRoles'=>$nbRoles, 'statsEmojis' => $statsEmojis];
     }
 
     /**

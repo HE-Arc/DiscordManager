@@ -14,13 +14,13 @@
                     <p>Guild region : {{$guild->region}}</p>
                     <p>Number of members : {{$stats['nbMembers']}}</p>
                     <p>Number of roles : {{$stats['nbRoles']}}</p>
-                    <p>Total number of channels : {{$stats['statsChannels']['0'] + $stats['statsChannels']['2'] + $stats['statsChannels']['4']}}</p>
-                    <p>Number of text channels : {{$stats['statsChannels']['0']}}</p>
-                    <p>Number of voice channels : {{$stats['statsChannels']['2']}}</p>
-                    <p>Number of categories : {{$stats['statsChannels']['4']}}</p>
-                    <p>Total number of Emojis : {{$stats['statsEmojis'][0] + $stats['statsEmojis'][1]}}</p>
-                    <p>Number of Emojis: {{$stats['statsEmojis'][0]}}</p>
-                    <p>Number of animated Emojis : {{$stats['statsEmojis'][1]}}</p>
+                    <p>Total number of channels : {{$stats['statsChannels']->get('0', 0) + $stats['statsChannels']->get('2', 0) + $stats['statsChannels']->get('4', 0)}}</p>
+                    <p>Number of text channels : {{$stats['statsChannels']->get('0', 0)}}</p>
+                    <p>Number of voice channels : {{$stats['statsChannels']->get('2', 0)}}</p>
+                    <p>Number of categories : {{$stats['statsChannels']->get('4', 0)}}</p>
+                    <p>Total number of Emojis : {{$stats['statsEmojis']->get('0', 0) + $stats['statsEmojis']->get('1', 0)}}</p>
+                    <p>Number of Emojis: {{$stats['statsEmojis']->get('0', 0)}}</p>
+                    <p>Number of animated Emojis : {{$stats['statsEmojis']->get('1', 0)}}</p>
                 </div>
             </div>
 
