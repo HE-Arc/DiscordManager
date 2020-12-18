@@ -103,6 +103,9 @@
                             all
                         </div>
                         <div id="listRoles" class="list-group list-group-flush">
+                            @if(empty($roles))
+                                <a class="btn btn-primary" data-toggle="modal" href="#modalRoles" >Roles are missing ?</a>
+                            @else
                             @foreach ($roles as $role)
                                 <label class="list-group-item d-flex justify-content-start align-items-center">
                                     <input class="form-check-input" type="checkbox" name="rolesId[]"
@@ -114,6 +117,7 @@
                                 </label>
 
                             @endforeach
+                            @endif
                         </div>
                     </div>
 
@@ -150,6 +154,31 @@
                         </div>
                         <div class="modal-body">
                             Please wait, our owls are working on your request.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal Explication -->
+            <div class="modal show fade" id="modalRoles" tabindex="-1" role="dialog" >
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex justify-content-center " >
+                            <h5 class="modal-title " id="exampleModalLabel">Roles are Missing ?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Our owls probably don't have enough permissions to manage roles.
+                            The bot can only manage roles lower than him.
+                            Go to your discord client and try to change his position or give him a role with an higher position.
+                            After that reload the page to apply the change.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="location.reload();">Reload</button>
                         </div>
                     </div>
                 </div>

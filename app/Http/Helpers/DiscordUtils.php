@@ -171,7 +171,7 @@ class DiscordUtils
 
     /**
      * Extracts stats from guilds
-     * 
+     *
      * @param $guild
      * @return array
      */
