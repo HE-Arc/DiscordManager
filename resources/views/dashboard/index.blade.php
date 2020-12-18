@@ -6,7 +6,7 @@
     @yield('nav2')
     <div class=" d-flex justify-content-around " id="dashboard">
         <div class="col-10" id="insidedb">
-            <form method="POST" action="{{route("dashboard.update",$guild->id)}}" onsubmit="$('#myModal').modal('show'); $('#submitBtn').attr('disabled', true);">
+            <form method="POST" action="{{route("dashboard.update",$guild->id)}}" onsubmit="$('#modalWait').modal('show'); $('#submitBtn').attr('disabled', true);">
                 @csrf
                 <div class="row">
 
@@ -75,18 +75,18 @@
 
                             <div class="list-group" id="list-tab" role="tablist">
                                 <a class="list-group-item list-group-item-action active"
-                                   onclick="document.getElementById('role_list').style.visibility = 'visible';
-                                   document.getElementById('action').value = 'addRoles';"
+                                   onclick="$('#role_list').css('visibility', 'visible');
+                                   $('#action').attr('value', 'addRoles');"
                                    data-toggle="list" href="#"
                                    role="tab" aria-controls="home">Add roles</a>
                                 <a class="list-group-item list-group-item-action"
-                                   onclick="document.getElementById('role_list').style.visibility = 'visible';
-                                   document.getElementById('action').value = 'removeRoles';"
+                                   onclick="$('#role_list').css('visibility', 'visible');
+                                   $('#action').attr('value', 'removeRoles');"
                                    data-toggle="list" href="#" role="tab"
                                    aria-controls="profile">Remove roles</a>
                                 <a class="list-group-item list-group-item-action"
-                                   onclick="document.getElementById('role_list').style.visibility = 'hidden';
-                                   document.getElementById('action').value = 'kick';"
+                                   onclick="$('#role_list').css('visibility', 'hidden');
+                                   $('#action').attr('value', 'kick');"
                                    data-toggle="list" href="#" role="tab"
                                    aria-controls="messages">Kick user</a>
                             </div>
@@ -138,8 +138,8 @@
                 </div>
             </form>
 
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" >
+            <!-- Modal Waiting-->
+            <div class="modal fade" id="modalWait" tabindex="-1" role="dialog" >
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header d-flex justify-content-center " >
@@ -149,7 +149,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            Please wait while our owls are working on your request.
+                            Please wait, our owls are working on your request.
                         </div>
                     </div>
                 </div>
