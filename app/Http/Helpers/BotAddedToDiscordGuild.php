@@ -13,6 +13,7 @@ class BotAddedToDiscordGuild
 
     /**
      * Redirect to the good page when bot was successfully added
+     *
      * @param Guild $guild
      * @return RedirectResponse
      */
@@ -23,6 +24,7 @@ class BotAddedToDiscordGuild
 
     /**
      * Redirect to the good page when bot was not added
+     *
      * @param string $error
      * @return RedirectResponse
      */

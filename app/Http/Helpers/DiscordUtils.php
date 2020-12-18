@@ -13,6 +13,7 @@ class DiscordUtils
 
     /**
      * Singleton of the users guilds
+     *
      * @return null
      */
     public static function getClientGuilds()
@@ -27,6 +28,7 @@ class DiscordUtils
 
     /**
      * Check if the bot is in the specified guild with id
+     *
      * @param $guildId
      * @return bool
      */
@@ -40,6 +42,7 @@ class DiscordUtils
 
     /**
      * Check if the bot is in the specified guild with id
+     *
      * @param $guildsId
      * @return array
      */
@@ -53,6 +56,7 @@ class DiscordUtils
 
     /**
      * Add roles to members
+     *
      * @param $guildId
      * @param $usersId
      * @param $rolesId
@@ -75,6 +79,7 @@ class DiscordUtils
 
     /**
      * Remove roles to members
+     *
      * @param $guildId
      * @param $usersId
      * @param $rolesId
@@ -98,6 +103,7 @@ class DiscordUtils
 
     /**
      * Remove members from the guild
+     *
      * @param $guildId
      * @param $usersId
      * @return array
@@ -118,6 +124,7 @@ class DiscordUtils
 
     /**
      * Ban members from the guild
+     *
      * @param $guildId
      * @param $usersId
      * @param string $reason
@@ -134,6 +141,7 @@ class DiscordUtils
 
     /**
      * Unban members from the guild
+     *
      * @param $guildId
      * @param $usersId
      * @deprecated Problem with Restcord api
@@ -147,6 +155,7 @@ class DiscordUtils
 
     /**
      * List roles workable by the bot
+     *
      * @param $guildId
      * @return array
      */
@@ -162,6 +171,7 @@ class DiscordUtils
 
     /**
      * Handle exception from Discord API with Guzzle Client
+     *
      * @param CommandClientException $exception
      * @return string[]
      */

@@ -16,6 +16,7 @@ class DashboardController extends Controller
 {
     /**
      * List user addable servers, manageable servers and create the view
+     *
      * @param Request $request
      * @return Application|Factory|View
      */
@@ -39,6 +40,7 @@ class DashboardController extends Controller
 
     /**
      * List members and accessible roles of a guild and create the view
+     *
      * @param $id
      * @return Application|Factory|View
      */
@@ -54,6 +56,7 @@ class DashboardController extends Controller
 
     /**
      * Show statistics about the guild
+     *
      * @param $id
      * @return Application|Factory|View
      */
@@ -65,6 +68,7 @@ class DashboardController extends Controller
 
     /**
      * Verify the form and apply the action
+     *
      * @param Request $request
      * @return RedirectResponse
      */
@@ -94,6 +98,7 @@ class DashboardController extends Controller
 
     /**
      * Add Roles to the users with DiscordUtils::addGuildMembersRoles
+     *
      * @param $id
      * @param $usersId
      * @param $rolesId
@@ -106,6 +111,7 @@ class DashboardController extends Controller
 
     /**
      * Remove Roles to the users with DiscordUtils::removeGuildMembersRoles
+     *
      * @param $id
      * @param $usersId
      * @param $rolesId
@@ -118,6 +124,7 @@ class DashboardController extends Controller
 
     /**
      * Kick all the users with DiscordUtils::removeGuildMembers
+     *
      * @param $id
      * @param $usersId
      * @return array

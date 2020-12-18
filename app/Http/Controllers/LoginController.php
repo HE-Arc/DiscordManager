@@ -27,6 +27,7 @@ class LoginController extends Controller
 
     /**
      * Handle the callback of discord after logging in
+     *
      * @param Request $request
      * @return RedirectResponse
      */
@@ -57,6 +58,7 @@ class LoginController extends Controller
 
     /**
      * Perform a proper logout
+     *
      * @return RedirectResponse
      */
     public function logout()
@@ -67,6 +69,7 @@ class LoginController extends Controller
 
     /**
      * Start to add the bot to a guild
+     *
      * @param $id
      */
     public function addBot($id)
@@ -82,6 +85,7 @@ class LoginController extends Controller
 
     /**
      * Handle the callback of discord after adding a bot
+     *
      * @return mixed
      */
     public function handleBotCallback()
