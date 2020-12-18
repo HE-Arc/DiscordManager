@@ -48,7 +48,7 @@ Route::group([
 
         Route::get('/about-server/{id}', [DashboardController::class, 'aboutServer'])->name("dashboard.about");
 
-        Route::get('/{id}', [DashboardController::class, 'server'])->name("lel");
+        Route::get('/{id}', [DashboardController::class, 'server'])->name("dashboard.server");
         Route::post('/update/{id}', [DashboardController::class, 'update'])->name("dashboard.update");
     });
 

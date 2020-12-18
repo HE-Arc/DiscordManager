@@ -68,7 +68,7 @@ class DashboardController extends Controller
             }
         }
         if (!isEmpty($result)) dd($result);
-        return redirect()->route('lel', $request->id);
+        return redirect()->route('dashboard.server', $request->id);
     }
 
     private function addRoles($id, $usersId, $rolesId)
