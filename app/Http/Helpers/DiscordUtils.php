@@ -169,7 +169,12 @@ class DiscordUtils
         return $filteredRoles->skip(1)->all(); //everyone is ALWAYS the first of the list
     }
 
-
+    /**
+     * Extracts stats from guilds
+     * 
+     * @param $guild
+     * @return array
+     */
     public static function getSomeGuildStats($guild)
     {
         $guild = collect($guild);
