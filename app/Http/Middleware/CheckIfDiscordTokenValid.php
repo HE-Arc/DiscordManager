@@ -9,8 +9,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use LaravelRestcord\Discord;
-use LaravelRestcord\Discord\ApiClient;
 
 class CheckIfDiscordTokenValid
 {

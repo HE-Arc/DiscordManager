@@ -3,16 +3,10 @@
 namespace App\Http\Middleware;
 
 use App\Http\Helpers\DiscordUtils;
-use App\Models\User;
 use Closure;
-use GuzzleHttp\Client;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
-use LaravelRestcord\Discord;
-use LaravelRestcord\Discord\ApiClient;
 
 class CheckBotAdded
 {
