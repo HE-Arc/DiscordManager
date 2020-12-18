@@ -149,7 +149,7 @@ class DiscordUtils
     public static function removeGuildBans($guildId, $usersId)
     {
         foreach ($usersId as $userId) {
-            dd(app('DiscordClient')->guild->removeGuildBan(['guild.id' => $guildId, 'user.id' => $userId]));
+            app('DiscordClient')->guild->removeGuildBan(['guild.id' => $guildId, 'user.id' => $userId]);
         }
     }
 
@@ -167,6 +167,23 @@ class DiscordUtils
         $maxBotRolesPosition = $roles->whereIn('id', $botRoles)->max('position');
         $filteredRoles = $roles->where('managed', false)->whereBetween('position', [0, $maxBotRolesPosition - 1]);
         return $filteredRoles->skip(1)->all(); //everyone is ALWAYS the first of the list
+    }
+
+
+    public static function getSomeGuildStats($guild)
+    {
+        $guild = collect($guild);
+        $channels = collect(app('DiscordClient')->guild->getGuildChannels(['guild.id' => $guild->get('id')]));
+        $statsChannels = $channels->countBy(function ($channel){
+            return $channel->type;
+        });
+        $nbMembers = collect(app('DiscordClient')->guild->listGuildMembers(['guild.id' => $guild->get('id'), 'limit' => 1000]))->count();
+        $nbRoles = collect($guild->get('roles'))->count();
+        $statsEmojis = collect($guild->get('emojis'))->countBy(function ($emoji){
+            return $emoji->animated;
+        });
+
+        return ['statsChannels' => $statsChannels->all(), 'nbMembers'=>$nbMembers, 'nbRoles'=>$nbRoles, 'statsEmojis' => $statsEmojis->all()];
     }
 
     /**

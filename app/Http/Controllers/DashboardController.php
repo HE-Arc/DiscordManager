@@ -63,7 +63,9 @@ class DashboardController extends Controller
     public function aboutServer($id)
     {
         $guild = app('DiscordClient')->guild->getGuild(['guild.id' => intval($id)]);
-        return view('dashboard.server-info', ["guild" => $guild, "members" => [], "roles" => [], "pageName" => "Server info"]);
+        $stats = DiscordUtils::getSomeGuildStats($guild);
+//        dd($guild);
+        return view('dashboard.server-info', ["guild" => $guild, "stats" => $stats, "pageName" => "Server info"]);
     }
 
     /**
