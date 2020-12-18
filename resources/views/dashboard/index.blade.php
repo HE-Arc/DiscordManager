@@ -138,7 +138,7 @@
                 </div>
             </form>
 
-            <!-- Modal Waiting-->
+            <!-- Modal Waiting Request-->
             <div class="modal fade" id="modalWait" tabindex="-1" role="dialog" >
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
