@@ -24,7 +24,12 @@ L'application aura besoin de l'identifiant client (DISCORD_KEY) et de la clé se
 
 <img src="https://cdn.discordapp.com/attachments/696649991116292106/789293169908908072/unknown.png" width="400">
 
-Ci-dessous, il est important de renseigner les 3 routes suivantes ("<domain>/", "<domain>/login-callback", "<domain>/discord/bot-added")
+Ci-dessous, il est important de renseigner les 3 routes suivantes :
+```
+<domain>/
+<domain>/login-callback
+<domain>/discord/bot-added
+```
 
 <img src="https://cdn.discordapp.com/attachments/696649991116292106/789291958061236274/unknown.png" width="400">
 
