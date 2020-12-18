@@ -11,10 +11,13 @@ class DiscordUtils
 {
     private static $clientGuilds = null;
 
+    /**
+     * Singleton of the users guilds
+     * @return null
+     */
     public static function getClientGuilds()
     {
-        if (is_null(DiscordUtils::$clientGuilds))
-        {
+        if (is_null(DiscordUtils::$clientGuilds)) {
             $apiclient = app(ApiClient::class);
             $discord = new Discord($apiclient);
             DiscordUtils::$clientGuilds = $discord->guilds();
@@ -62,8 +65,7 @@ class DiscordUtils
             foreach ($rolesId as $roleId) {
                 try {
                     app('DiscordClient')->guild->addGuildMemberRole(['guild.id' => intval($guildId), 'user.id' => intval($userId), 'role.id' => intval($roleId)]);
-                }
-                catch (CommandClientException $exception) {
+                } catch (CommandClientException $exception) {
                     $results[$userId] = self::handleDiscordException($exception);
                 }
             }
@@ -95,6 +97,7 @@ class DiscordUtils
     }
 
     /**
+     * Remove members from the guild
      * @param $guildId
      * @param $usersId
      * @return array
@@ -114,6 +117,7 @@ class DiscordUtils
     }
 
     /**
+     * Ban members from the guild
      * @param $guildId
      * @param $usersId
      * @param string $reason
@@ -129,6 +133,7 @@ class DiscordUtils
     }
 
     /**
+     * Unban members from the guild
      * @param $guildId
      * @param $usersId
      * @deprecated Problem with Restcord api
@@ -140,17 +145,26 @@ class DiscordUtils
         }
     }
 
-
+    /**
+     * List roles workable by the bot
+     * @param $guildId
+     * @return array
+     */
     public static function listWorkableRoles($guildId)
     {
         $botId = app('DiscordClient')->user->getCurrentUser()->id;
         $botRoles = app('DiscordClient')->guild->getGuildMember(['guild.id' => $guildId, 'user.id' => $botId])->roles;
         $roles = collect(app('DiscordClient')->guild->getGuildRoles(['guild.id' => $guildId]));
         $maxBotRolesPosition = $roles->whereIn('id', $botRoles)->max('position');
-        $filteredRoles = $roles->where('managed', false)->whereBetween('position', [0, $maxBotRolesPosition-1]);
+        $filteredRoles = $roles->where('managed', false)->whereBetween('position', [0, $maxBotRolesPosition - 1]);
         return $filteredRoles->skip(1)->all(); //everyone is ALWAYS the first of the list
     }
 
+    /**
+     * Handle exception from Discord API with Guzzle Client
+     * @param CommandClientException $exception
+     * @return string[]
+     */
     public static function handleDiscordException(CommandClientException $exception)
     {
         $code = $exception->getResponse()->getStatusCode();
