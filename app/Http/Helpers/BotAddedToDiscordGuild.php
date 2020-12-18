@@ -3,9 +3,8 @@
 
 namespace App\Http\Helpers;
 
-use Illuminate\Support\Facades\Session;
-use LaravelRestcord\Discord\Bots\HandlesBotAddedToGuild;
 use Illuminate\Http\RedirectResponse;
+use LaravelRestcord\Discord\Bots\HandlesBotAddedToGuild;
 use LaravelRestcord\Discord\Guild;
 
 class BotAddedToDiscordGuild

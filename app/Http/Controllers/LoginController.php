@@ -4,15 +4,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Helpers\DiscordUtils;
-use Illuminate\Auth\Events\Login;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-use LaravelRestcord\Authentication\Socialite\DiscordProvider;
 use LaravelRestcord\Discord;
-use LaravelRestcord\ServiceProvider;
-use RestCord\DiscordClient;
-use App\Models\User;
 
 class LoginController extends Controller
 {

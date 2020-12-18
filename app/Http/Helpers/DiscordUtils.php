@@ -6,8 +6,6 @@ namespace App\Http\Helpers;
 use GuzzleHttp\Command\Exception\CommandClientException;
 use LaravelRestcord\Discord;
 use LaravelRestcord\Discord\ApiClient;
-use RestCord\DiscordClient;
-use RestCord\RateLimit\RatelimitException;
 
 class DiscordUtils
 {

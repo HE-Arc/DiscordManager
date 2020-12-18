@@ -8,8 +8,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use LaravelRestcord\Discord;
-use LaravelRestcord\Discord\ApiClient;
-use RestCord\DiscordClient;
 
 class CheckAccessToServer
 {

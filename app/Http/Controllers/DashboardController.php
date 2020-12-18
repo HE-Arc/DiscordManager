@@ -6,8 +6,6 @@ namespace App\Http\Controllers;
 use App\Http\Helpers\DiscordUtils;
 use Illuminate\Http\Request;
 use LaravelRestcord\Discord;
-use LaravelRestcord\Discord\ApiClient;
-use RestCord\DiscordClient;
 use function PHPUnit\Framework\isEmpty;
 
 class DashboardController extends Controller
