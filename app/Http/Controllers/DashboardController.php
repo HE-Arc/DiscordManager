@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Helpers\DiscordUtils;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use LaravelRestcord\Discord;
 use function PHPUnit\Framework\isEmpty;
 
 class DashboardController extends Controller
 {
-    //Affiche la page listant les serveurs (anciennement home)
+    /**
+     * List user addable servers, manageable servers and create the view
+     * @param Request $request
+     * @return Application|Factory|View
+     */
     public function servers(Request $request)
     {
         $guilds = DiscordUtils::getClientGuilds();
@@ -29,6 +37,11 @@ class DashboardController extends Controller
         return view('dashboard.servers.index', ["InGuildList" => $InGuildList, "NotInGuildList" => $NotInGuildList]);
     }
 
+    /**
+     * List members and accessible roles of a guild and create the view
+     * @param $id
+     * @return Application|Factory|View
+     */
     public function server($id)
     {
         $discordClientGuild = app('DiscordClient')->guild;
@@ -39,12 +52,22 @@ class DashboardController extends Controller
         return view('dashboard.index', ["guild" => $guild, "members" => $members, "roles" => $roles, "pageName" => "Members"]);
     }
 
+    /**
+     * Show statistics about the guild
+     * @param $id
+     * @return Application|Factory|View
+     */
     public function aboutServer($id)
     {
         $guild = app('DiscordClient')->guild->getGuild(['guild.id' => intval($id)]);
         return view('dashboard.server-info', ["guild" => $guild, "members" => [], "roles" => [], "pageName" => "Server info"]);
     }
 
+    /**
+     * Verify the form and apply the action
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function update(Request $request)
     {
         $result = [];
@@ -69,16 +92,36 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.server', $request->id);
     }
 
+    /**
+     * Add Roles to the users with DiscordUtils::addGuildMembersRoles
+     * @param $id
+     * @param $usersId
+     * @param $rolesId
+     * @return array
+     */
     private function addRoles($id, $usersId, $rolesId)
     {
         return DiscordUtils::addGuildMembersRoles($id, $usersId, $rolesId);
     }
 
+    /**
+     * Remove Roles to the users with DiscordUtils::removeGuildMembersRoles
+     * @param $id
+     * @param $usersId
+     * @param $rolesId
+     * @return array
+     */
     private function removeRoles($id, $usersId, $rolesId)
     {
         return DiscordUtils::removeGuildMembersRoles($id, $usersId, $rolesId);
     }
 
+    /**
+     * Kick all the users with DiscordUtils::removeGuildMembers
+     * @param $id
+     * @param $usersId
+     * @return array
+     */
     private function kick($id, $usersId)
     {
         return DiscordUtils::removeGuildMembers($id, $usersId);
