@@ -63,7 +63,8 @@ class DashboardController extends Controller
     public function aboutServer($id)
     {
         $guild = app('DiscordClient')->guild->getGuild(['guild.id' => intval($id)]);
-        return view('dashboard.server-info', ["guild" => $guild, "members" => [], "roles" => [], "pageName" => "Server info"]);
+        $stats = DiscordUtils::getSomeGuildStats($guild);
+        return view('dashboard.server-info', ["guild" => $guild, "stats" => $stats, "pageName" => "Server info"]);
     }
 
     /**
@@ -92,7 +93,8 @@ class DashboardController extends Controller
                     break;
             }
         }
-        if (!isEmpty($result)) dd($result);
+        if (!isEmpty($result))
+            return redirect()->route('dashboard.server', $request->id)->with(['status' => 'alert-danger', 'status_msg' => "One or more errors occured, try again later"]);
         return redirect()->route('dashboard.server', $request->id);
     }
 
