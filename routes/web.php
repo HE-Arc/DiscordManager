@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\LoginController;
-use \App\Http\Controllers\HomeController;
 use \App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
@@ -16,19 +15,44 @@ use \App\Http\Controllers\DashboardController;
 */
 Route::redirect("/","/welcome");
 Route::view("/welcome","welcome.index")->name("welcome");
-Route::get('/login', [LoginController::class, 'redirectToProvider'])->name("login");
-Route::get('/login-callback', [LoginController::class, 'loginCallback']);
 
 Route::group([
-    'middleware' => ['auth']
+    'middleware' => ['redirectIfAuth']
 ], function (){
-    Route::get("/home", [HomeController::class, 'index'])->name("home");
-    Route::get('/add-bot/{id}',[LoginController::class, 'addBot'])->name("add-bot");
+    Route::get('/login', [LoginController::class, 'redirectToProvider'])->name("login");
+    Route::get('/login-callback', [LoginController::class, 'loginCallback']);
+});
+
+Route::group([
+    'middleware' => ['auth','refreshDiscordToken','sessionHasDiscordToken']
+], function (){
+    Route::prefix('dashboard')->group(function () {
+        Route::get("/", [DashboardController::class, 'servers'])->name("dashboard");
+    });
     Route::get('/discord/bot-added', [LoginController::class, 'handleBotCallback']);
-    Route::get('/dashboard/{id}', [DashboardController::class, 'index'])->name("dashboard");
     Route::get('/logout', [LoginController::class, 'logout'])->name("logout");
-    Route::view("/register","welcome")->name("register");
-    Route::get("/test", [HomeController::class, 'apiTest'])->name("test");
+});
+
+Route::group([
+    'middleware' => ['auth','refreshDiscordToken','sessionHasDiscordToken',"checkAccessToServer"]
+], function (){
+    Route::get('/add-bot/{id}',[LoginController::class, 'addBot'])->name("add-bot");
+});
+
+
+Route::group([
+    'middleware' => ['auth','refreshDiscordToken','sessionHasDiscordToken',"checkBotAdded","checkAccessToServer"]
+], function (){
+
+    Route::prefix('dashboard')->group(function () {
+
+        Route::get('/about-server/{id}', [DashboardController::class, 'aboutServer'])->name("dashboard.about");
+
+        Route::get('/{id}', [DashboardController::class, 'server'])->name("dashboard.server");
+        Route::post('/update/{id}', [DashboardController::class, 'update'])->name("dashboard.update");
+    });
+
+
 });
 
 
