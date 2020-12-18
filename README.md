@@ -16,6 +16,15 @@ Pour administrer votre serveur, il suffit de vous connecter avec votre compte Di
 
 <img src="https://cdn.discordapp.com/attachments/696649991116292106/789297670053036062/unknown.png" width="600">
 
+## Remarques
+Il se peut que vous ne puissiez sélectionner aucun rôle dans l'interface d'administration.
+
+<img src="https://media.discordapp.net/attachments/696649991116292106/789300833153843230/unknown.png" width="600">
+
+Dans ce cas, assurez-vous avant toutes choses que le bot "Discord Manager" possèdent bien le droit "Administrateur" sur votre serveur et que son rôle soit le plus possible dans la hiérarchie.
+
+<img src="https://media.discordapp.net/attachments/696649991116292106/789301509237374976/unknown.png" width="600">
+
 ## Mise en place
 
 Pour mettre en place l'application sur votre serveur web, il faut tout d'abord créer une nouvelle application et un bot sur le [portail développeur Discord](https://discord.com/developers/applications).
@@ -33,7 +42,7 @@ Ci-dessous, il est important de renseigner les 3 routes suivantes :
 
 <img src="https://cdn.discordapp.com/attachments/696649991116292106/789291958061236274/unknown.png" width="600">
 
-L'application utilisera aussi le token du bot Discord.
+L'application utilisera aussi le token du bot Discord (DISCORD_BOT_TOKEN).
 
 <img src="https://cdn.discordapp.com/attachments/696649991116292106/789294045578133544/unknown.png" width="600">
 
